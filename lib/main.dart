@@ -40,43 +40,81 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  // Widget _selectTab() {
-  //   switch (_selectedTabIndex) {
-  //     case 0:
-  //       return const Center(child: Icon(Icons.ac_unit, size: 200));
-  //     case 1:
-  //       return const Center(child: Icon(Icons.home, size: 200));
-  //     case 2:
-  //       return const Center(child: Icon(Icons.edit, size: 200));
-  //     default:
-  //       return const Center(child: Icon(Icons.ac_unit, size: 200));
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
+    final size = 150.0;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            'Your progress below',
-            style: Theme.of(context).textTheme.headline6,
-          ),
-          Row(
-            children: [
-              CircularProgressIndicator(
-                value: 0.8,
-              ),
-              CircularProgressIndicator(
-                value: 0.4,
-              ),
-            ],
-          ),
-        ],
+      body: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Your Friendly progress below',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  width: size,
+                  height: size,
+                  color: Colors.blue,
+                  padding: EdgeInsets.all(20),
+                  child: CircularProgressIndicator(
+                    strokeWidth: 10,
+                    color: Colors.white,
+                    backgroundColor: Colors.grey,
+                    value: 0.8,
+                  ),
+                ),
+                Container(
+                  width: size,
+                  height: size,
+                  color: Colors.orange,
+                  padding: EdgeInsets.all(20),
+                  child: CircularProgressIndicator(
+                    strokeWidth: 10,
+                    color: Colors.white,
+                    backgroundColor: Colors.grey,
+                    value: 0.5,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  width: size,
+                  height: size,
+                  color: Colors.lime,
+                  padding: EdgeInsets.all(20),
+                  child: CircularProgressIndicator(
+                    strokeWidth: 10,
+                    color: Colors.white,
+                    backgroundColor: Colors.grey,
+                    value: 0.8,
+                  ),
+                ),
+                Container(
+                  width: size,
+                  height: size,
+                  color: Colors.red,
+                  padding: EdgeInsets.all(20),
+                  child: CircularProgressIndicator(
+                    strokeWidth: 10,
+                    color: Colors.white,
+                    backgroundColor: Colors.grey,
+                    value: 0.5,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedTabIndex,
