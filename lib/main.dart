@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final size = 150.0;
+    final size = 80.0;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -56,7 +56,63 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             SizedBox(height: 20.0),
-            Text('WELCOME INTROVER USER'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  child: Image(
+                    // width: 300,
+                    height: 100,
+                    image: AssetImage("assets/usericon.png"),
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
+                Text("Your Name Bro"),
+              ],
+            ),
+            Column(
+              children: [
+                Text('SOMETHING HERE'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      child: Image(
+                        // width: 300,
+                        height: 50,
+                        image: AssetImage("assets/usericon.png"),
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ),
+                    Container(
+                      child: Image(
+                        // width: 300,
+                        height: 50,
+                        image: AssetImage("assets/usericon.png"),
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ),
+                    Container(
+                      child: Image(
+                        // width: 300,
+                        height: 50,
+                        image: AssetImage("assets/usericon.png"),
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ),
+                    Container(
+                      child: Image(
+                        // width: 300,
+                        height: 50,
+                        image: AssetImage("assets/usericon.png"),
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+            // Text('WELCOME INTROVER USER'),
             Text(
               'Your Friendly progress below',
               style: Theme.of(context).textTheme.headline6,
@@ -119,16 +175,16 @@ class _MyHomePageState extends State<MyHomePage> {
                         strokeWidth: 10,
                         color: Colors.white,
                         backgroundColor: Colors.grey,
-                        value: 0.5,
+                        value: _metSomeone,
                       ),
                     ),
                     RaisedButton(
                       onPressed: () {
                         setState(() {
-                          _smile = _smile + 0.2;
+                          _metSomeone = _metSomeone + 0.2;
                         });
                       },
-                      child: Text('test1'),
+                      child: Text('test2'),
                     ),
                   ],
                 )
@@ -157,16 +213,16 @@ class _MyHomePageState extends State<MyHomePage> {
                         strokeWidth: 10,
                         color: Colors.white,
                         backgroundColor: Colors.grey,
-                        value: 0.8,
+                        value: _wentOutside,
                       ),
                     ),
                     RaisedButton(
                       onPressed: () {
                         setState(() {
-                          _smile = _smile + 0.2;
+                          _wentOutside = _wentOutside + 0.2;
                         });
                       },
-                      child: Text('test1'),
+                      child: Text('test3'),
                     ),
                   ],
                 ),
@@ -185,16 +241,16 @@ class _MyHomePageState extends State<MyHomePage> {
                         strokeWidth: 10,
                         color: Colors.white,
                         backgroundColor: Colors.grey,
-                        value: 0.8,
+                        value: _goodDay,
                       ),
                     ),
                     RaisedButton(
                       onPressed: () {
                         setState(() {
-                          _smile = _smile + 0.2;
+                          _goodDay = _goodDay + 0.2;
                         });
                       },
-                      child: Text('test1'),
+                      child: Text('test4'),
                     ),
                   ],
                 ),
@@ -224,7 +280,7 @@ class _MyHomePageState extends State<MyHomePage> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.ac_unit),
-            label: 'cars',
+            label: 'Profile',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
