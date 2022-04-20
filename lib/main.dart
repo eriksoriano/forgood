@@ -44,262 +44,529 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+// start of widget for entire SCREEN for profile tab
+  Widget _profileScreen() {
+    final size = 80.0;
+
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          // SizedBox(height: 10.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: EdgeInsets.only(right: 20),
+                child: Image(
+                  // width: 300,
+                  height: 100,
+                  image: AssetImage("assets/usericon.png"),
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
+              Text(
+                "Your Name Bro",
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          Column(
+            children: [
+              Text('SOMETHING HERE'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(right: 20),
+                    child: Image(
+                      // width: 300,
+                      height: 50,
+                      image: AssetImage("assets/trophy.png"),
+                      fit: BoxFit.fitWidth,
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(right: 20),
+                    child: Image(
+                      // width: 300,
+                      height: 50,
+                      image: AssetImage("assets/trophy.png"),
+                      fit: BoxFit.fitWidth,
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(right: 20),
+                    child: Image(
+                      // width: 300,
+                      height: 50,
+                      image: AssetImage("assets/trophy.png"),
+                      fit: BoxFit.fitWidth,
+                    ),
+                  ),
+                  Container(
+                    // padding: EdgeInsets.only(right: 20),
+                    child: Image(
+                      // width: 300,
+                      height: 50,
+                      image: AssetImage("assets/trophy.png"),
+                      fit: BoxFit.fitWidth,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+          // Text('WELCOME INTROVER USER'),
+          Text(
+            'Your Friendly progress below',
+            style: Theme.of(context).textTheme.headline6,
+          ),
+          // the row for smiled and met someone
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                children: [
+                  Text(
+                    'Smiled @Someone',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  Text(
+                    "Completed 1/5",
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    width: size,
+                    height: size,
+                    color: Colors.blue,
+                    padding: EdgeInsets.all(20),
+                    child: CircularProgressIndicator(
+                      strokeWidth: 10,
+                      color: Colors.white,
+                      backgroundColor: Colors.grey,
+                      value: _smile,
+                    ),
+                  ),
+                  RaisedButton(
+                    onPressed: () {
+                      setState(() {
+                        _smile = _smile + 0.2;
+                      });
+                    },
+                    child: Text('test1'),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  Text(
+                    'Met Someone',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  Text(
+                    "Completed 1/5",
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  Container(
+                    width: size,
+                    height: size,
+                    color: Colors.orange,
+                    padding: EdgeInsets.all(20),
+                    child: CircularProgressIndicator(
+                      strokeWidth: 10,
+                      color: Colors.white,
+                      backgroundColor: Colors.grey,
+                      value: _metSomeone,
+                    ),
+                  ),
+                  RaisedButton(
+                    onPressed: () {
+                      setState(() {
+                        _metSomeone = _metSomeone + 0.2;
+                      });
+                    },
+                    child: Text('test2'),
+                  ),
+                ],
+              )
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+
+          // the row for went outwside and good day below
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                children: [
+                  Text(
+                    'Went to Outside',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  Container(
+                    width: size,
+                    height: size,
+                    color: Colors.lime,
+                    padding: EdgeInsets.all(20),
+                    child: CircularProgressIndicator(
+                      strokeWidth: 10,
+                      color: Colors.white,
+                      backgroundColor: Colors.grey,
+                      value: _wentOutside,
+                    ),
+                  ),
+                  RaisedButton(
+                    onPressed: () {
+                      setState(() {
+                        _wentOutside = _wentOutside + 0.2;
+                      });
+                    },
+                    child: Text('test3'),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  Text(
+                    'Had Good day',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  Container(
+                    width: size,
+                    height: size,
+                    color: Colors.red,
+                    padding: EdgeInsets.all(20),
+                    child: CircularProgressIndicator(
+                      strokeWidth: 10,
+                      color: Colors.white,
+                      backgroundColor: Colors.grey,
+                      value: _goodDay,
+                    ),
+                  ),
+                  RaisedButton(
+                    onPressed: () {
+                      setState(() {
+                        _goodDay = _goodDay + 0.2;
+                      });
+                    },
+                    child: Text('test4'),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+
+          RaisedButton(
+            onPressed: () {
+              setState(() {
+                _smile = 0.0;
+                _metSomeone = 0.0;
+                _wentOutside = 0.0;
+                _goodDay = 0.0;
+              });
+            },
+            child: Text('RESET ALL'),
+          ),
+        ],
+      ),
+    );
+  }
+  // start of widget for entire SCREEN for profile tab
+
+  //----------------------------------------------------------------------------
+  //----------------------------------------------------------------------------
+
+  // widget that changes tabs and each case is a screen (containing their own widget)
+  Widget _selectTab() {
+    switch (_selectedTabIndex) {
+      case 0:
+        return _profileScreen();
+      case 1:
+        return const Center(child: Icon(Icons.home, size: 200));
+      case 2:
+        return const Center(child: Icon(Icons.edit, size: 200));
+      default:
+        return const Center(child: Icon(Icons.ac_unit, size: 200));
+    }
+  }
+  // widget that changes tabs and each case is a screen (containing their own widget)
+
+  // double _smile = 0.0;
+  // double _metSomeone = 0.0;
+  // double _wentOutside = 0.0;
+  // double _goodDay = 0.0;
+
   @override
   Widget build(BuildContext context) {
-    final size = 80.0;
+    // final size = 80.0;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+      // appBar: AppBar(
+      //   title: Text(widget.title),
+      // ),
+      body: Center(
+        child: _selectTab(),
       ),
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            // SizedBox(height: 10.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  padding: EdgeInsets.only(right: 20),
-                  child: Image(
-                    // width: 300,
-                    height: 100,
-                    image: AssetImage("assets/usericon.png"),
-                    fit: BoxFit.fitWidth,
-                  ),
-                ),
-                Text(
-                  "Your Name Bro",
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                Text('SOMETHING HERE'),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(right: 20),
-                      child: Image(
-                        // width: 300,
-                        height: 50,
-                        image: AssetImage("assets/trophy.png"),
-                        fit: BoxFit.fitWidth,
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(right: 20),
-                      child: Image(
-                        // width: 300,
-                        height: 50,
-                        image: AssetImage("assets/trophy.png"),
-                        fit: BoxFit.fitWidth,
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(right: 20),
-                      child: Image(
-                        // width: 300,
-                        height: 50,
-                        image: AssetImage("assets/trophy.png"),
-                        fit: BoxFit.fitWidth,
-                      ),
-                    ),
-                    Container(
-                      // padding: EdgeInsets.only(right: 20),
-                      child: Image(
-                        // width: 300,
-                        height: 50,
-                        image: AssetImage("assets/trophy.png"),
-                        fit: BoxFit.fitWidth,
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-            // Text('WELCOME INTROVER USER'),
-            Text(
-              'Your Friendly progress below',
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            // the row for smiled and met someone
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  children: [
-                    Text(
-                      'Smiled',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    Text(
-                      "Completed 1/5",
-                      style: TextStyle(fontSize: 15),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      width: size,
-                      height: size,
-                      color: Colors.blue,
-                      padding: EdgeInsets.all(20),
-                      child: CircularProgressIndicator(
-                        strokeWidth: 10,
-                        color: Colors.white,
-                        backgroundColor: Colors.grey,
-                        value: _smile,
-                      ),
-                    ),
-                    RaisedButton(
-                      onPressed: () {
-                        setState(() {
-                          _smile = _smile + 0.2;
-                        });
-                      },
-                      child: Text('test1'),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text(
-                      'Met Someone',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    Text(
-                      "Completed 1/5",
-                      style: TextStyle(fontSize: 15),
-                    ),
-                    Container(
-                      width: size,
-                      height: size,
-                      color: Colors.orange,
-                      padding: EdgeInsets.all(20),
-                      child: CircularProgressIndicator(
-                        strokeWidth: 10,
-                        color: Colors.white,
-                        backgroundColor: Colors.grey,
-                        value: _metSomeone,
-                      ),
-                    ),
-                    RaisedButton(
-                      onPressed: () {
-                        setState(() {
-                          _metSomeone = _metSomeone + 0.2;
-                        });
-                      },
-                      child: Text('test2'),
-                    ),
-                  ],
-                )
-              ],
-            ),
-            SizedBox(
-              height: 30,
-            ),
+      // body: Container(
+      //   child: Column(
+      //     mainAxisAlignment: MainAxisAlignment.start,
+      //     children: <Widget>[
+      //       // SizedBox(height: 10.0),
+      //       Row(
+      //         mainAxisAlignment: MainAxisAlignment.center,
+      //         children: [
+      //           Container(
+      //             padding: EdgeInsets.only(right: 20),
+      //             child: Image(
+      //               // width: 300,
+      //               height: 100,
+      //               image: AssetImage("assets/usericon.png"),
+      //               fit: BoxFit.fitWidth,
+      //             ),
+      //           ),
+      //           Text(
+      //             "Your Name Bro",
+      //             style: TextStyle(
+      //               fontSize: 25,
+      //               fontWeight: FontWeight.bold,
+      //             ),
+      //           ),
+      //         ],
+      //       ),
+      //       Column(
+      //         children: [
+      //           Text('SOMETHING HERE'),
+      //           Row(
+      //             mainAxisAlignment: MainAxisAlignment.center,
+      //             children: [
+      //               Container(
+      //                 padding: EdgeInsets.only(right: 20),
+      //                 child: Image(
+      //                   // width: 300,
+      //                   height: 50,
+      //                   image: AssetImage("assets/trophy.png"),
+      //                   fit: BoxFit.fitWidth,
+      //                 ),
+      //               ),
+      //               Container(
+      //                 padding: EdgeInsets.only(right: 20),
+      //                 child: Image(
+      //                   // width: 300,
+      //                   height: 50,
+      //                   image: AssetImage("assets/trophy.png"),
+      //                   fit: BoxFit.fitWidth,
+      //                 ),
+      //               ),
+      //               Container(
+      //                 padding: EdgeInsets.only(right: 20),
+      //                 child: Image(
+      //                   // width: 300,
+      //                   height: 50,
+      //                   image: AssetImage("assets/trophy.png"),
+      //                   fit: BoxFit.fitWidth,
+      //                 ),
+      //               ),
+      //               Container(
+      //                 // padding: EdgeInsets.only(right: 20),
+      //                 child: Image(
+      //                   // width: 300,
+      //                   height: 50,
+      //                   image: AssetImage("assets/trophy.png"),
+      //                   fit: BoxFit.fitWidth,
+      //                 ),
+      //               ),
+      //             ],
+      //           )
+      //         ],
+      //       ),
+      //       // Text('WELCOME INTROVER USER'),
+      //       Text(
+      //         'Your Friendly progress below',
+      //         style: Theme.of(context).textTheme.headline6,
+      //       ),
+      //       // the row for smiled and met someone
+      //       Row(
+      //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //         children: [
+      //           Column(
+      //             children: [
+      //               Text(
+      //                 'Smiled @Someone',
+      //                 style: TextStyle(fontSize: 15),
+      //               ),
+      //               Text(
+      //                 "Completed 1/5",
+      //                 style: TextStyle(fontSize: 15),
+      //               ),
+      //               SizedBox(
+      //                 height: 10,
+      //               ),
+      //               Container(
+      //                 width: size,
+      //                 height: size,
+      //                 color: Colors.blue,
+      //                 padding: EdgeInsets.all(20),
+      //                 child: CircularProgressIndicator(
+      //                   strokeWidth: 10,
+      //                   color: Colors.white,
+      //                   backgroundColor: Colors.grey,
+      //                   value: _smile,
+      //                 ),
+      //               ),
+      //               RaisedButton(
+      //                 onPressed: () {
+      //                   setState(() {
+      //                     _smile = _smile + 0.2;
+      //                   });
+      //                 },
+      //                 child: Text('test1'),
+      //               ),
+      //             ],
+      //           ),
+      //           Column(
+      //             children: [
+      //               Text(
+      //                 'Met Someone',
+      //                 style: TextStyle(fontSize: 15),
+      //               ),
+      //               Text(
+      //                 "Completed 1/5",
+      //                 style: TextStyle(fontSize: 15),
+      //               ),
+      //               Container(
+      //                 width: size,
+      //                 height: size,
+      //                 color: Colors.orange,
+      //                 padding: EdgeInsets.all(20),
+      //                 child: CircularProgressIndicator(
+      //                   strokeWidth: 10,
+      //                   color: Colors.white,
+      //                   backgroundColor: Colors.grey,
+      //                   value: _metSomeone,
+      //                 ),
+      //               ),
+      //               RaisedButton(
+      //                 onPressed: () {
+      //                   setState(() {
+      //                     _metSomeone = _metSomeone + 0.2;
+      //                   });
+      //                 },
+      //                 child: Text('test2'),
+      //               ),
+      //             ],
+      //           )
+      //         ],
+      //       ),
+      //       SizedBox(
+      //         height: 10,
+      //       ),
 
-            // the row for went outwside and good day below
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  children: [
-                    Text(
-                      'Went Outside',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    Container(
-                      width: size,
-                      height: size,
-                      color: Colors.lime,
-                      padding: EdgeInsets.all(20),
-                      child: CircularProgressIndicator(
-                        strokeWidth: 10,
-                        color: Colors.white,
-                        backgroundColor: Colors.grey,
-                        value: _wentOutside,
-                      ),
-                    ),
-                    RaisedButton(
-                      onPressed: () {
-                        setState(() {
-                          _wentOutside = _wentOutside + 0.2;
-                        });
-                      },
-                      child: Text('test3'),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text(
-                      'Good day',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    Container(
-                      width: size,
-                      height: size,
-                      color: Colors.red,
-                      padding: EdgeInsets.all(20),
-                      child: CircularProgressIndicator(
-                        strokeWidth: 10,
-                        color: Colors.white,
-                        backgroundColor: Colors.grey,
-                        value: _goodDay,
-                      ),
-                    ),
-                    RaisedButton(
-                      onPressed: () {
-                        setState(() {
-                          _goodDay = _goodDay + 0.2;
-                        });
-                      },
-                      child: Text('test4'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
+      //       // the row for went outwside and good day below
+      //       Row(
+      //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //         children: [
+      //           Column(
+      //             children: [
+      //               Text(
+      //                 'Went to Outside',
+      //                 style: TextStyle(fontSize: 15),
+      //               ),
+      //               Container(
+      //                 width: size,
+      //                 height: size,
+      //                 color: Colors.lime,
+      //                 padding: EdgeInsets.all(20),
+      //                 child: CircularProgressIndicator(
+      //                   strokeWidth: 10,
+      //                   color: Colors.white,
+      //                   backgroundColor: Colors.grey,
+      //                   value: _wentOutside,
+      //                 ),
+      //               ),
+      //               RaisedButton(
+      //                 onPressed: () {
+      //                   setState(() {
+      //                     _wentOutside = _wentOutside + 0.2;
+      //                   });
+      //                 },
+      //                 child: Text('test3'),
+      //               ),
+      //             ],
+      //           ),
+      //           Column(
+      //             children: [
+      //               Text(
+      //                 'Had Good day',
+      //                 style: TextStyle(fontSize: 15),
+      //               ),
+      //               Container(
+      //                 width: size,
+      //                 height: size,
+      //                 color: Colors.red,
+      //                 padding: EdgeInsets.all(20),
+      //                 child: CircularProgressIndicator(
+      //                   strokeWidth: 10,
+      //                   color: Colors.white,
+      //                   backgroundColor: Colors.grey,
+      //                   value: _goodDay,
+      //                 ),
+      //               ),
+      //               RaisedButton(
+      //                 onPressed: () {
+      //                   setState(() {
+      //                     _goodDay = _goodDay + 0.2;
+      //                   });
+      //                 },
+      //                 child: Text('test4'),
+      //               ),
+      //             ],
+      //           ),
+      //         ],
+      //       ),
+      //       SizedBox(
+      //         height: 10,
+      //       ),
 
-            RaisedButton(
-              onPressed: () {
-                setState(() {
-                  _smile = 0.0;
-                  _metSomeone = 0.0;
-                  _wentOutside = 0.0;
-                  _goodDay = 0.0;
-                });
-              },
-              child: Text('RESET ALL'),
-            ),
-          ],
-        ),
-      ),
+      //       RaisedButton(
+      //         onPressed: () {
+      //           setState(() {
+      //             _smile = 0.0;
+      //             _metSomeone = 0.0;
+      //             _wentOutside = 0.0;
+      //             _goodDay = 0.0;
+      //           });
+      //         },
+      //         child: Text('RESET ALL'),
+      //       ),
+      //     ],
+      //   ),
+      // ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedTabIndex,
         onTap: _onItemTapped,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.ac_unit),
-            label: 'Profile',
+            icon: Icon(Icons.person),
+            label: 'My Profile',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'home',
+            icon: Icon(Icons.task),
+            label: 'Suggestions',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.edit),
-            label: 'edit',
+            icon: Icon(Icons.place),
+            label: 'Your Location',
           ),
         ],
       ),
