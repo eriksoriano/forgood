@@ -55,11 +55,12 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            SizedBox(height: 20.0),
+            // SizedBox(height: 10.0),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
+                  padding: EdgeInsets.only(right: 20),
                   child: Image(
                     // width: 300,
                     height: 100,
@@ -67,7 +68,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     fit: BoxFit.fitWidth,
                   ),
                 ),
-                Text("Your Name Bro"),
+                Text(
+                  "Your Name Bro",
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ],
             ),
             Column(
@@ -77,34 +84,38 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
+                      padding: EdgeInsets.only(right: 20),
                       child: Image(
                         // width: 300,
                         height: 50,
-                        image: AssetImage("assets/usericon.png"),
+                        image: AssetImage("assets/trophy.png"),
                         fit: BoxFit.fitWidth,
                       ),
                     ),
                     Container(
+                      padding: EdgeInsets.only(right: 20),
                       child: Image(
                         // width: 300,
                         height: 50,
-                        image: AssetImage("assets/usericon.png"),
+                        image: AssetImage("assets/trophy.png"),
                         fit: BoxFit.fitWidth,
                       ),
                     ),
                     Container(
+                      padding: EdgeInsets.only(right: 20),
                       child: Image(
                         // width: 300,
                         height: 50,
-                        image: AssetImage("assets/usericon.png"),
+                        image: AssetImage("assets/trophy.png"),
                         fit: BoxFit.fitWidth,
                       ),
                     ),
                     Container(
+                      // padding: EdgeInsets.only(right: 20),
                       child: Image(
                         // width: 300,
                         height: 50,
-                        image: AssetImage("assets/usericon.png"),
+                        image: AssetImage("assets/trophy.png"),
                         fit: BoxFit.fitWidth,
                       ),
                     ),
@@ -257,7 +268,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
             SizedBox(
-              height: 30,
+              height: 10,
             ),
 
             RaisedButton(
