@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
       home: const MyHomePage(
-        title: 'Flutter Demo Home Page',
+        title: 'Introvert Helper',
       ),
     );
   }
@@ -33,6 +33,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedTabIndex = 0;
+  double _smile = 0.0;
+  double _metSomeone = 0.0;
+  double _wentOutside = 0.0;
+  double _goodDay = 0.0;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -49,69 +53,167 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Container(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            SizedBox(height: 20.0),
+            Text('WELCOME INTROVER USER'),
             Text(
               'Your Friendly progress below',
               style: Theme.of(context).textTheme.headline6,
             ),
+            // the row for smiled and met someone
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
-                  width: size,
-                  height: size,
-                  color: Colors.blue,
-                  padding: EdgeInsets.all(20),
-                  child: CircularProgressIndicator(
-                    strokeWidth: 10,
-                    color: Colors.white,
-                    backgroundColor: Colors.grey,
-                    value: 0.8,
-                  ),
+                Column(
+                  children: [
+                    Text(
+                      'Smiled',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    Text(
+                      "Completed 1/5",
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: size,
+                      height: size,
+                      color: Colors.blue,
+                      padding: EdgeInsets.all(20),
+                      child: CircularProgressIndicator(
+                        strokeWidth: 10,
+                        color: Colors.white,
+                        backgroundColor: Colors.grey,
+                        value: _smile,
+                      ),
+                    ),
+                    RaisedButton(
+                      onPressed: () {
+                        setState(() {
+                          _smile = _smile + 0.2;
+                        });
+                      },
+                      child: Text('test1'),
+                    ),
+                  ],
                 ),
-                Container(
-                  width: size,
-                  height: size,
-                  color: Colors.orange,
-                  padding: EdgeInsets.all(20),
-                  child: CircularProgressIndicator(
-                    strokeWidth: 10,
-                    color: Colors.white,
-                    backgroundColor: Colors.grey,
-                    value: 0.5,
-                  ),
+                Column(
+                  children: [
+                    Text(
+                      'Met Someone',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    Text(
+                      "Completed 1/5",
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    Container(
+                      width: size,
+                      height: size,
+                      color: Colors.orange,
+                      padding: EdgeInsets.all(20),
+                      child: CircularProgressIndicator(
+                        strokeWidth: 10,
+                        color: Colors.white,
+                        backgroundColor: Colors.grey,
+                        value: 0.5,
+                      ),
+                    ),
+                    RaisedButton(
+                      onPressed: () {
+                        setState(() {
+                          _smile = _smile + 0.2;
+                        });
+                      },
+                      child: Text('test1'),
+                    ),
+                  ],
+                )
+              ],
+            ),
+            SizedBox(
+              height: 30,
+            ),
+
+            // the row for went outwside and good day below
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  children: [
+                    Text(
+                      'Went Outside',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    Container(
+                      width: size,
+                      height: size,
+                      color: Colors.lime,
+                      padding: EdgeInsets.all(20),
+                      child: CircularProgressIndicator(
+                        strokeWidth: 10,
+                        color: Colors.white,
+                        backgroundColor: Colors.grey,
+                        value: 0.8,
+                      ),
+                    ),
+                    RaisedButton(
+                      onPressed: () {
+                        setState(() {
+                          _smile = _smile + 0.2;
+                        });
+                      },
+                      child: Text('test1'),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text(
+                      'Good day',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    Container(
+                      width: size,
+                      height: size,
+                      color: Colors.red,
+                      padding: EdgeInsets.all(20),
+                      child: CircularProgressIndicator(
+                        strokeWidth: 10,
+                        color: Colors.white,
+                        backgroundColor: Colors.grey,
+                        value: 0.8,
+                      ),
+                    ),
+                    RaisedButton(
+                      onPressed: () {
+                        setState(() {
+                          _smile = _smile + 0.2;
+                        });
+                      },
+                      child: Text('test1'),
+                    ),
+                  ],
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  width: size,
-                  height: size,
-                  color: Colors.lime,
-                  padding: EdgeInsets.all(20),
-                  child: CircularProgressIndicator(
-                    strokeWidth: 10,
-                    color: Colors.white,
-                    backgroundColor: Colors.grey,
-                    value: 0.8,
-                  ),
-                ),
-                Container(
-                  width: size,
-                  height: size,
-                  color: Colors.red,
-                  padding: EdgeInsets.all(20),
-                  child: CircularProgressIndicator(
-                    strokeWidth: 10,
-                    color: Colors.white,
-                    backgroundColor: Colors.grey,
-                    value: 0.5,
-                  ),
-                ),
-              ],
+            SizedBox(
+              height: 30,
+            ),
+
+            RaisedButton(
+              onPressed: () {
+                setState(() {
+                  _smile = 0.0;
+                  _metSomeone = 0.0;
+                  _wentOutside = 0.0;
+                  _goodDay = 0.0;
+                });
+              },
+              child: Text('RESET ALL'),
             ),
           ],
         ),
