@@ -35,70 +35,70 @@ class _MyHomePageState extends State<MyHomePage> {
 // **************************************************************************
 // the list of items in the list below; this will be moved into a new page
 // **************************************************************************
-  // final List<int> _items = List<int>.generate(20, (int index) => index);
+  final List<int> _items = List<int>.generate(20, (int index) => index);
 
-  List<String> tasks = [
-    "A Task",
-    "B Task",
-    "C Task",
-    "D Task",
-    "E Task",
-    "F Task",
-    "G Task",
-    "H Task"
-  ];
+  // List<String> tasks = [
+  //   "A Task",
+  //   "B Task",
+  //   "C Task",
+  //   "D Task",
+  //   "E Task",
+  //   "F Task",
+  //   "G Task",
+  //   "H Task"
+  // ];
 
   @override
   Widget _listofOpportunities() {
-    // final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    // final Color oddItemColor = colorScheme.primary.withOpacity(0.05);
-    // final Color evenItemColor = colorScheme.primary.withOpacity(0.15);
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final Color oddItemColor = colorScheme.primary.withOpacity(0.05);
+    final Color evenItemColor = colorScheme.primary.withOpacity(0.15);
 
-    // return ReorderableListView(
-    //   padding: const EdgeInsets.symmetric(horizontal: 40),
-    //   children: <Widget>[
-    //     for (int index = 0; index < _items.length; index += 1)
-    //       ListTile(
-    //         key: Key('$index'),
-    //         tileColor: _items[index].isOdd ? oddItemColor : evenItemColor,
-    //         title: Text('Suggestion ${_items[index]}'),
-    //       ),
-    //   ],
-    //   onReorder: (int oldIndex, int newIndex) {
-    //     setState(() {
-    //       if (oldIndex < newIndex) {
-    //         newIndex -= 1;
-    //       }
-    //       final int item = _items.removeAt(oldIndex);
-    //       _items.insert(newIndex, item);
-    //     });
-    //   },
-    // );
-    return Container(
-      padding: EdgeInsets.all(8.0),
-      child: ReorderableListView(
-          children: [
-            for (final task in tasks)
-              Card(
-                color: Colors.lightBlueAccent.shade100,
-                key: ValueKey(task),
-                elevation: 5.0,
-                child: ListTile(
-                  title: Text(task),
-                  leading: Icon(Icons.work, color: Colors.black),
-                ),
-              ),
-          ],
-          onReorder: (oldIndex, newIndex) {
-            setState(() {
-              if (newIndex > oldIndex) {
-                newIndex = newIndex - 1;
-              }
-            });
-            final task = tasks.removeAt(oldIndex);
-            tasks.insert(newIndex, task);
-          }),
+    return ReorderableListView(
+      padding: const EdgeInsets.symmetric(horizontal: 40),
+      children: <Widget>[
+        for (int index = 0; index < _items.length; index += 1)
+          ListTile(
+            key: Key('$index'),
+            tileColor: _items[index].isOdd ? oddItemColor : evenItemColor,
+            title: Text('Suggestion ${_items[index]}'),
+          ),
+      ],
+      onReorder: (int oldIndex, int newIndex) {
+        setState(() {
+          if (oldIndex < newIndex) {
+            newIndex -= 1;
+          }
+          final int item = _items.removeAt(oldIndex);
+          _items.insert(newIndex, item);
+        });
+      },
     );
+    // return Container(
+    //   padding: EdgeInsets.all(8.0),
+    //   child: ReorderableListView(
+    //       children: [
+    //         for (final task in tasks)
+    //           Card(
+    //             color: Colors.lightBlueAccent.shade100,
+    //             key: ValueKey(task),
+    //             elevation: 5.0,
+    //             child: ListTile(
+    //               title: Text(task),
+    //               leading: Icon(Icons.work, color: Colors.black),
+    //             ),
+    //           ),
+    //       ],
+    //       onReorder: (oldIndex, newIndex) {
+    //         setState(() {
+    //           if (newIndex > oldIndex) {
+    //             newIndex = newIndex - 1;
+    //           }
+    //         });
+    //         final task = tasks.removeAt(oldIndex);
+    //         tasks.insert(newIndex, task);
+    //       }),
+    // );
   }
 
 // **************************************************************************
@@ -107,9 +107,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   int _selectedTabIndex = 0;
   double _pickup = 0.0;
-  double _metSomeone = 0.0;
-  double _wentOutside = 0.0;
-  double _goodDay = 0.0;
+  double _donate = 0.0;
+  double _help = 0.0;
+  double _smile = 0.0;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -163,10 +163,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    "Completed 1/5",
-                    style: TextStyle(fontSize: 15),
-                  ),
                   SizedBox(
                     height: 10,
                   ),
@@ -175,11 +171,22 @@ class _MyHomePageState extends State<MyHomePage> {
                     height: size,
                     // color: Colors.blue,
                     // padding: EdgeInsets.all(20),
-                    child: CircularProgressIndicator(
-                      strokeWidth: 10,
-                      // color: Colors.red,
-                      // backgroundColor: Colors.grey,
-                      value: _pickup,
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        CircularProgressIndicator(
+                          strokeWidth: 10,
+                          color: Colors.red,
+                          backgroundColor: Colors.grey,
+                          value: _pickup,
+                        ),
+                        Center(
+                          child: Text(
+                            "0%",
+                            style: TextStyle(fontSize: 30),
+                          ),
+                        )
+                      ],
                     ),
                   ),
                   SizedBox(
@@ -216,23 +223,30 @@ class _MyHomePageState extends State<MyHomePage> {
                   SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    "Completed 1/5",
-                    style: TextStyle(fontSize: 15),
-                  ),
                   SizedBox(
                     height: 10,
                   ),
                   Container(
                     width: size,
                     height: size,
-                    // color: Colors.orange,
+                    // color: Colors.blue,
                     // padding: EdgeInsets.all(20),
-                    child: CircularProgressIndicator(
-                      strokeWidth: 10,
-                      color: Colors.blue,
-                      backgroundColor: Colors.grey,
-                      value: _metSomeone,
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        CircularProgressIndicator(
+                          strokeWidth: 10,
+                          color: Colors.orange,
+                          backgroundColor: Colors.grey,
+                          value: _donate,
+                        ),
+                        Center(
+                          child: Text(
+                            "0%",
+                            style: TextStyle(fontSize: 30),
+                          ),
+                        )
+                      ],
                     ),
                   ),
                   SizedBox(
@@ -241,7 +255,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        _metSomeone = _metSomeone + 0.2;
+                        _donate = _donate + 0.2;
                       });
                     },
                     child: Text('Update (+)'),
@@ -273,7 +287,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Column(
                 children: [
                   Text(
-                    'Donate',
+                    'Help Someone',
                     style: TextStyle(fontSize: 20),
                   ),
                   SizedBox(
@@ -282,13 +296,24 @@ class _MyHomePageState extends State<MyHomePage> {
                   Container(
                     width: size,
                     height: size,
-                    // color: Colors.lime,
+                    // color: Colors.blue,
                     // padding: EdgeInsets.all(20),
-                    child: CircularProgressIndicator(
-                      strokeWidth: 10,
-                      color: Colors.orange,
-                      backgroundColor: Colors.grey,
-                      value: _wentOutside,
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        CircularProgressIndicator(
+                          strokeWidth: 10,
+                          color: Colors.purple,
+                          backgroundColor: Colors.grey,
+                          value: _help,
+                        ),
+                        Center(
+                          child: Text(
+                            "0%",
+                            style: TextStyle(fontSize: 30),
+                          ),
+                        )
+                      ],
                     ),
                   ),
                   SizedBox(
@@ -297,7 +322,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        _wentOutside = _wentOutside + 0.2;
+                        _help = _help + 0.2;
                       });
                     },
                     child: Text('Update (+)'),
@@ -320,7 +345,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Text(
                     'Make Someone Smile',
-                    style: TextStyle(fontSize: 15),
+                    style: TextStyle(fontSize: 10),
                   ),
                   SizedBox(
                     height: 10,
@@ -328,13 +353,24 @@ class _MyHomePageState extends State<MyHomePage> {
                   Container(
                     width: size,
                     height: size,
-                    // color: Colors.red,
+                    // color: Colors.blue,
                     // padding: EdgeInsets.all(20),
-                    child: CircularProgressIndicator(
-                      strokeWidth: 10,
-                      color: Colors.purple,
-                      backgroundColor: Colors.grey,
-                      value: _goodDay,
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        CircularProgressIndicator(
+                          strokeWidth: 10,
+                          color: Colors.pink,
+                          backgroundColor: Colors.grey,
+                          value: _smile,
+                        ),
+                        Center(
+                          child: Text(
+                            "0%",
+                            style: TextStyle(fontSize: 30),
+                          ),
+                        )
+                      ],
                     ),
                   ),
                   SizedBox(
@@ -343,7 +379,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        _goodDay = _goodDay + 0.2;
+                        _smile = _smile + 0.2;
                       });
                     },
                     child: Text('Update (+)'),
@@ -368,9 +404,9 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () {
               setState(() {
                 _pickup = 0.0;
-                _metSomeone = 0.0;
-                _wentOutside = 0.0;
-                _goodDay = 0.0;
+                _donate = 0.0;
+                _help = 0.0;
+                _smile = 0.0;
               });
             },
             style: ElevatedButton.styleFrom(primary: Colors.black),
