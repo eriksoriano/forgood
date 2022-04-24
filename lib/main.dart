@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
 // **************************************************************************
 // the list of items in the list below; this will be moved into a new page
 // **************************************************************************
-  final List<int> _items = List<int>.generate(20, (int index) => index);
+  // final List<int> _items = List<int>.generate(20, (int index) => index);
 
   List<String> tasks = [
     "A Task",
@@ -47,6 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
     "G Task",
     "H Task"
   ];
+
   @override
   Widget _listofOpportunities() {
     // final ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -156,7 +157,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Column(
                 children: [
                   Text(
-                    'Pick Up  Litter',
+                    'Pick Up',
                     style: TextStyle(fontSize: 20),
                   ),
                   SizedBox(
@@ -176,8 +177,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     // padding: EdgeInsets.all(20),
                     child: CircularProgressIndicator(
                       strokeWidth: 10,
-                      color: Colors.red,
-                      backgroundColor: Colors.grey,
+                      // color: Colors.red,
+                      // backgroundColor: Colors.grey,
                       value: _pickup,
                     ),
                   ),
@@ -392,9 +393,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _selectTab() {
     switch (_selectedTabIndex) {
       case 0:
-        return _profileScreen();
-      case 1:
         return _listofOpportunities();
+      case 1:
+        return _profileScreen();
       case 2:
         return Text("Other content will go here once we realize what it is",
             style: TextStyle(fontSize: 30));
