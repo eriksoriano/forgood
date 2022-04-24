@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 // start of widget for entire SCREEN for profile tab
   Widget _profileScreen() {
-    final size = 80.0;
+    final size = 100.0;
 
     return Container(
       child: Column(
@@ -74,57 +74,61 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ],
           ),
+          SizedBox(
+            height: 20,
+          ),
+
           Column(
             children: [
-              Text('SOMETHING HERE'),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: EdgeInsets.only(right: 20),
-                    child: Image(
-                      // width: 300,
-                      height: 50,
-                      image: AssetImage("assets/trophy.png"),
-                      fit: BoxFit.fitWidth,
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(right: 20),
-                    child: Image(
-                      // width: 300,
-                      height: 50,
-                      image: AssetImage("assets/trophy.png"),
-                      fit: BoxFit.fitWidth,
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(right: 20),
-                    child: Image(
-                      // width: 300,
-                      height: 50,
-                      image: AssetImage("assets/trophy.png"),
-                      fit: BoxFit.fitWidth,
-                    ),
-                  ),
-                  Container(
-                    // padding: EdgeInsets.only(right: 20),
-                    child: Image(
-                      // width: 300,
-                      height: 50,
-                      image: AssetImage("assets/trophy.png"),
-                      fit: BoxFit.fitWidth,
-                    ),
-                  ),
-                ],
-              )
+              // Text('SOMETHING HERE'),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     Container(
+              //       padding: EdgeInsets.only(right: 20),
+              //       child: Image(
+              //         // width: 300,
+              //         height: 40,
+              //         image: AssetImage("assets/trophy.png"),
+              //         fit: BoxFit.fitWidth,
+              //       ),
+              //     ),
+              //     Container(
+              //       padding: EdgeInsets.only(right: 20),
+              //       child: Image(
+              //         // width: 300,
+              //         height: 40,
+              //         image: AssetImage("assets/trophy.png"),
+              //         fit: BoxFit.fitWidth,
+              //       ),
+              //     ),
+              //     Container(
+              //       padding: EdgeInsets.only(right: 20),
+              //       child: Image(
+              //         // width: 300,
+              //         height: 40,
+              //         image: AssetImage("assets/trophy.png"),
+              //         fit: BoxFit.fitWidth,
+              //       ),
+              //     ),
+              //     Container(
+              //       // padding: EdgeInsets.only(right: 20),
+              //       child: Image(
+              //         // width: 300,
+              //         height: 40,
+              //         image: AssetImage("assets/trophy.png"),
+              //         fit: BoxFit.fitWidth,
+              //       ),
+              //     ),
+              //   ],
+              // ),
             ],
           ),
           // Text('WELCOME INTROVER USER'),
-          Text(
-            'Your Friendly progress below',
-            style: Theme.of(context).textTheme.headline6,
-          ),
+          // Text(
+          //   'Your Friendly progress below',
+          //   style: Theme.of(context).textTheme.headline6,
+          // ),
           // the row for smiled and met someone
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -132,8 +136,8 @@ class _MyHomePageState extends State<MyHomePage> {
               Column(
                 children: [
                   Text(
-                    'Smiled @Someone',
-                    style: TextStyle(fontSize: 15),
+                    'Pick Up  Litter',
+                    style: TextStyle(fontSize: 20),
                   ),
                   Text(
                     "Completed 1/5",
@@ -145,11 +149,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   Container(
                     width: size,
                     height: size,
-                    color: Colors.blue,
-                    padding: EdgeInsets.all(20),
+                    // color: Colors.blue,
+                    // padding: EdgeInsets.all(20),
                     child: CircularProgressIndicator(
                       strokeWidth: 10,
-                      color: Colors.white,
+                      color: Colors.red,
                       backgroundColor: Colors.grey,
                       value: _smile,
                     ),
@@ -167,8 +171,8 @@ class _MyHomePageState extends State<MyHomePage> {
               Column(
                 children: [
                   Text(
-                    'Met Someone',
-                    style: TextStyle(fontSize: 15),
+                    'Donate',
+                    style: TextStyle(fontSize: 20),
                   ),
                   Text(
                     "Completed 1/5",
@@ -177,11 +181,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   Container(
                     width: size,
                     height: size,
-                    color: Colors.orange,
-                    padding: EdgeInsets.all(20),
+                    // color: Colors.orange,
+                    // padding: EdgeInsets.all(20),
                     child: CircularProgressIndicator(
                       strokeWidth: 10,
-                      color: Colors.white,
+                      color: Colors.blue,
                       backgroundColor: Colors.grey,
                       value: _metSomeone,
                     ),
@@ -209,17 +213,17 @@ class _MyHomePageState extends State<MyHomePage> {
               Column(
                 children: [
                   Text(
-                    'Went to Outside',
-                    style: TextStyle(fontSize: 15),
+                    'Volunteer',
+                    style: TextStyle(fontSize: 20),
                   ),
                   Container(
                     width: size,
                     height: size,
-                    color: Colors.lime,
-                    padding: EdgeInsets.all(20),
+                    // color: Colors.lime,
+                    // padding: EdgeInsets.all(20),
                     child: CircularProgressIndicator(
                       strokeWidth: 10,
-                      color: Colors.white,
+                      color: Colors.orange,
                       backgroundColor: Colors.grey,
                       value: _wentOutside,
                     ),
@@ -237,17 +241,17 @@ class _MyHomePageState extends State<MyHomePage> {
               Column(
                 children: [
                   Text(
-                    'Had Good day',
+                    'Make Someone Smile',
                     style: TextStyle(fontSize: 15),
                   ),
                   Container(
                     width: size,
                     height: size,
-                    color: Colors.red,
-                    padding: EdgeInsets.all(20),
+                    // color: Colors.red,
+                    // padding: EdgeInsets.all(20),
                     child: CircularProgressIndicator(
                       strokeWidth: 10,
-                      color: Colors.white,
+                      color: Colors.purple,
                       backgroundColor: Colors.grey,
                       value: _goodDay,
                     ),
@@ -292,13 +296,13 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _selectTab() {
     switch (_selectedTabIndex) {
       case 0:
-        return _profileScreen();
-      case 1:
         return const Center(child: Icon(Icons.home, size: 200));
+      case 1:
+        return const Center(child: Icon(Icons.task, size: 200));
       case 2:
-        return const Center(child: Icon(Icons.edit, size: 200));
+        return _profileScreen();
       default:
-        return const Center(child: Icon(Icons.ac_unit, size: 200));
+        return const Center(child: Icon(Icons.home, size: 200));
     }
   }
   // widget that changes tabs and each case is a screen (containing their own widget)
@@ -557,7 +561,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onTap: _onItemTapped,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.home),
             label: 'My Profile',
           ),
           BottomNavigationBarItem(
@@ -565,8 +569,8 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Suggestions',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.place),
-            label: 'Your Location',
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
         ],
       ),
