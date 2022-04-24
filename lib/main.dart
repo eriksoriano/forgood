@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Final App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Container(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           // SizedBox(height: 10.0),
           Row(
@@ -262,20 +262,23 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-  // start of widget for entire SCREEN for profile tab
+  // end of widget for entire SCREEN for profile tab
 
   //----------------------------------------------------------------------------
   //----------------------------------------------------------------------------
 
   // widget that changes tabs and each case is a screen (containing their own widget)
+  // this WIDGET is exclusive to the "Profile" bottom tab though
   Widget _selectTab() {
     switch (_selectedTabIndex) {
       case 0:
         return _profileScreen();
       case 1:
-        return const Center(child: Icon(Icons.task, size: 200));
+        return Text("list of volunteer opportunities locally goes here",
+            style: TextStyle(fontSize: 30));
       case 2:
-        return const Center(child: Icon(Icons.task, size: 200));
+        return Text("Other content will go here once we realize what it is",
+            style: TextStyle(fontSize: 30));
       default:
         return const Center(child: Icon(Icons.home, size: 200));
     }
@@ -290,267 +293,46 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     // final size = 80.0;
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(30.0),
-        child: AppBar(
-          title: Text(widget.title),
+    return MaterialApp(
+      home: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            bottom: TabBar(
+              tabs: [
+                Tab(icon: Icon(Icons.person)),
+                Tab(icon: Icon(Icons.notifications)),
+              ],
+            ),
+          ),
+          body: TabBarView(
+            children: [
+              _selectTab(),
+              Text(
+                "Here is the list of challenges/where user can choose to accept or decline, etc.",
+                style: TextStyle(fontSize: 40),
+              ),
+            ],
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: _selectedTabIndex,
+            onTap: _onItemTapped,
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: 'My Profile',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.task),
+                label: 'Suggestions',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.task),
+                label: 'Challenges',
+              ),
+            ],
+          ),
         ),
-      ),
-      body: Center(
-        child: _selectTab(),
-      ),
-      // body: Container(
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.start,
-      //     children: <Widget>[
-      //       // SizedBox(height: 10.0),
-      //       Row(
-      //         mainAxisAlignment: MainAxisAlignment.center,
-      //         children: [
-      //           Container(
-      //             padding: EdgeInsets.only(right: 20),
-      //             child: Image(
-      //               // width: 300,
-      //               height: 100,
-      //               image: AssetImage("assets/usericon.png"),
-      //               fit: BoxFit.fitWidth,
-      //             ),
-      //           ),
-      //           Text(
-      //             "Your Name Bro",
-      //             style: TextStyle(
-      //               fontSize: 25,
-      //               fontWeight: FontWeight.bold,
-      //             ),
-      //           ),
-      //         ],
-      //       ),
-      //       Column(
-      //         children: [
-      //           Text('SOMETHING HERE'),
-      //           Row(
-      //             mainAxisAlignment: MainAxisAlignment.center,
-      //             children: [
-      //               Container(
-      //                 padding: EdgeInsets.only(right: 20),
-      //                 child: Image(
-      //                   // width: 300,
-      //                   height: 50,
-      //                   image: AssetImage("assets/trophy.png"),
-      //                   fit: BoxFit.fitWidth,
-      //                 ),
-      //               ),
-      //               Container(
-      //                 padding: EdgeInsets.only(right: 20),
-      //                 child: Image(
-      //                   // width: 300,
-      //                   height: 50,
-      //                   image: AssetImage("assets/trophy.png"),
-      //                   fit: BoxFit.fitWidth,
-      //                 ),
-      //               ),
-      //               Container(
-      //                 padding: EdgeInsets.only(right: 20),
-      //                 child: Image(
-      //                   // width: 300,
-      //                   height: 50,
-      //                   image: AssetImage("assets/trophy.png"),
-      //                   fit: BoxFit.fitWidth,
-      //                 ),
-      //               ),
-      //               Container(
-      //                 // padding: EdgeInsets.only(right: 20),
-      //                 child: Image(
-      //                   // width: 300,
-      //                   height: 50,
-      //                   image: AssetImage("assets/trophy.png"),
-      //                   fit: BoxFit.fitWidth,
-      //                 ),
-      //               ),
-      //             ],
-      //           )
-      //         ],
-      //       ),
-      //       // Text('WELCOME INTROVER USER'),
-      //       Text(
-      //         'Your Friendly progress below',
-      //         style: Theme.of(context).textTheme.headline6,
-      //       ),
-      //       // the row for smiled and met someone
-      //       Row(
-      //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //         children: [
-      //           Column(
-      //             children: [
-      //               Text(
-      //                 'Smiled @Someone',
-      //                 style: TextStyle(fontSize: 15),
-      //               ),
-      //               Text(
-      //                 "Completed 1/5",
-      //                 style: TextStyle(fontSize: 15),
-      //               ),
-      //               SizedBox(
-      //                 height: 10,
-      //               ),
-      //               Container(
-      //                 width: size,
-      //                 height: size,
-      //                 color: Colors.blue,
-      //                 padding: EdgeInsets.all(20),
-      //                 child: CircularProgressIndicator(
-      //                   strokeWidth: 10,
-      //                   color: Colors.white,
-      //                   backgroundColor: Colors.grey,
-      //                   value: _smile,
-      //                 ),
-      //               ),
-      //               RaisedButton(
-      //                 onPressed: () {
-      //                   setState(() {
-      //                     _smile = _smile + 0.2;
-      //                   });
-      //                 },
-      //                 child: Text('test1'),
-      //               ),
-      //             ],
-      //           ),
-      //           Column(
-      //             children: [
-      //               Text(
-      //                 'Met Someone',
-      //                 style: TextStyle(fontSize: 15),
-      //               ),
-      //               Text(
-      //                 "Completed 1/5",
-      //                 style: TextStyle(fontSize: 15),
-      //               ),
-      //               Container(
-      //                 width: size,
-      //                 height: size,
-      //                 color: Colors.orange,
-      //                 padding: EdgeInsets.all(20),
-      //                 child: CircularProgressIndicator(
-      //                   strokeWidth: 10,
-      //                   color: Colors.white,
-      //                   backgroundColor: Colors.grey,
-      //                   value: _metSomeone,
-      //                 ),
-      //               ),
-      //               RaisedButton(
-      //                 onPressed: () {
-      //                   setState(() {
-      //                     _metSomeone = _metSomeone + 0.2;
-      //                   });
-      //                 },
-      //                 child: Text('test2'),
-      //               ),
-      //             ],
-      //           )
-      //         ],
-      //       ),
-      //       SizedBox(
-      //         height: 10,
-      //       ),
-
-      //       // the row for went outwside and good day below
-      //       Row(
-      //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //         children: [
-      //           Column(
-      //             children: [
-      //               Text(
-      //                 'Went to Outside',
-      //                 style: TextStyle(fontSize: 15),
-      //               ),
-      //               Container(
-      //                 width: size,
-      //                 height: size,
-      //                 color: Colors.lime,
-      //                 padding: EdgeInsets.all(20),
-      //                 child: CircularProgressIndicator(
-      //                   strokeWidth: 10,
-      //                   color: Colors.white,
-      //                   backgroundColor: Colors.grey,
-      //                   value: _wentOutside,
-      //                 ),
-      //               ),
-      //               RaisedButton(
-      //                 onPressed: () {
-      //                   setState(() {
-      //                     _wentOutside = _wentOutside + 0.2;
-      //                   });
-      //                 },
-      //                 child: Text('test3'),
-      //               ),
-      //             ],
-      //           ),
-      //           Column(
-      //             children: [
-      //               Text(
-      //                 'Had Good day',
-      //                 style: TextStyle(fontSize: 15),
-      //               ),
-      //               Container(
-      //                 width: size,
-      //                 height: size,
-      //                 color: Colors.red,
-      //                 padding: EdgeInsets.all(20),
-      //                 child: CircularProgressIndicator(
-      //                   strokeWidth: 10,
-      //                   color: Colors.white,
-      //                   backgroundColor: Colors.grey,
-      //                   value: _goodDay,
-      //                 ),
-      //               ),
-      //               RaisedButton(
-      //                 onPressed: () {
-      //                   setState(() {
-      //                     _goodDay = _goodDay + 0.2;
-      //                   });
-      //                 },
-      //                 child: Text('test4'),
-      //               ),
-      //             ],
-      //           ),
-      //         ],
-      //       ),
-      //       SizedBox(
-      //         height: 10,
-      //       ),
-
-      //       RaisedButton(
-      //         onPressed: () {
-      //           setState(() {
-      //             _smile = 0.0;
-      //             _metSomeone = 0.0;
-      //             _wentOutside = 0.0;
-      //             _goodDay = 0.0;
-      //           });
-      //         },
-      //         child: Text('RESET ALL'),
-      //       ),
-      //     ],
-      //   ),
-      // ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedTabIndex,
-        onTap: _onItemTapped,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'My Profile',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.task),
-            label: 'Suggestions',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.task),
-            label: 'Challenges',
-          ),
-        ],
       ),
     );
   }
