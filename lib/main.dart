@@ -37,67 +37,67 @@ class _MyHomePageState extends State<MyHomePage> {
 // **************************************************************************
   final List<int> _items = List<int>.generate(20, (int index) => index);
 
-  // List<String> tasks = [
-  //   "A Task",
-  //   "B Task",
-  //   "C Task",
-  //   "D Task",
-  //   "E Task",
-  //   "F Task",
-  //   "G Task",
-  //   "H Task"
-  // ];
+  List<String> tasks = [
+    "A Task",
+    "B Task",
+    "C Task",
+    "D Task",
+    "E Task",
+    "F Task",
+    "G Task",
+    "H Task"
+  ];
   @override
   Widget _listofOpportunities() {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final Color oddItemColor = colorScheme.primary.withOpacity(0.05);
-    final Color evenItemColor = colorScheme.primary.withOpacity(0.15);
+    // final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    // final Color oddItemColor = colorScheme.primary.withOpacity(0.05);
+    // final Color evenItemColor = colorScheme.primary.withOpacity(0.15);
 
-    return ReorderableListView(
-      padding: const EdgeInsets.symmetric(horizontal: 40),
-      children: <Widget>[
-        for (int index = 0; index < _items.length; index += 1)
-          ListTile(
-            key: Key('$index'),
-            tileColor: _items[index].isOdd ? oddItemColor : evenItemColor,
-            title: Text('Suggestion ${_items[index]}'),
-          ),
-      ],
-      onReorder: (int oldIndex, int newIndex) {
-        setState(() {
-          if (oldIndex < newIndex) {
-            newIndex -= 1;
-          }
-          final int item = _items.removeAt(oldIndex);
-          _items.insert(newIndex, item);
-        });
-      },
-    );
-    // return Container(
-    //   padding: EdgeInsets.all(8.0),
-    //   child: ReorderableListView(
-    //       children: [
-    //         for (final task in tasks)
-    //           Card(
-    //             color: Colors.lightBlueAccent.shade100,
-    //             key: ValueKey(task),
-    //             elevation: 5.0,
-    //             child: ListTile(
-    //               title: Text(task),
-    //               leading: Icon(Icons.work, color: Colors.black),
-    //             ),
-    //           ),
-    //       ],
-    //       onReorder: (oldIndex, newIndex) {
-    //         setState(() {
-    //           if (newIndex > oldIndex) {
-    //             newIndex = newIndex - 1;
-    //           }
-    //         });
-    //         final task = tasks.removeAt(oldIndex);
-    //         tasks.insert(newIndex, task);
-    //       }),
+    // return ReorderableListView(
+    //   padding: const EdgeInsets.symmetric(horizontal: 40),
+    //   children: <Widget>[
+    //     for (int index = 0; index < _items.length; index += 1)
+    //       ListTile(
+    //         key: Key('$index'),
+    //         tileColor: _items[index].isOdd ? oddItemColor : evenItemColor,
+    //         title: Text('Suggestion ${_items[index]}'),
+    //       ),
+    //   ],
+    //   onReorder: (int oldIndex, int newIndex) {
+    //     setState(() {
+    //       if (oldIndex < newIndex) {
+    //         newIndex -= 1;
+    //       }
+    //       final int item = _items.removeAt(oldIndex);
+    //       _items.insert(newIndex, item);
+    //     });
+    //   },
     // );
+    return Container(
+      padding: EdgeInsets.all(8.0),
+      child: ReorderableListView(
+          children: [
+            for (final task in tasks)
+              Card(
+                color: Colors.lightBlueAccent.shade100,
+                key: ValueKey(task),
+                elevation: 5.0,
+                child: ListTile(
+                  title: Text(task),
+                  leading: Icon(Icons.work, color: Colors.black),
+                ),
+              ),
+          ],
+          onReorder: (oldIndex, newIndex) {
+            setState(() {
+              if (newIndex > oldIndex) {
+                newIndex = newIndex - 1;
+              }
+            });
+            final task = tasks.removeAt(oldIndex);
+            tasks.insert(newIndex, task);
+          }),
+    );
   }
 
 // **************************************************************************
@@ -128,22 +128,22 @@ class _MyHomePageState extends State<MyHomePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                padding: EdgeInsets.only(right: 20),
-                child: Image(
-                  // width: 300,
-                  height: 60,
-                  image: AssetImage("assets/usericon.png"),
-                  fit: BoxFit.fitWidth,
-                ),
-              ),
-              Text(
-                "Your Name Bro",
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              // Container(
+              //   padding: EdgeInsets.only(right: 20),
+              //   child: Image(
+              //     // width: 300,
+              //     height: 60,
+              //     image: AssetImage("assets/usericon.png"),
+              //     fit: BoxFit.fitWidth,
+              //   ),
+              // ),
+              // Text(
+              //   "Your Name Bro",
+              //   style: TextStyle(
+              //     fontSize: 25,
+              //     fontWeight: FontWeight.bold,
+              //   ),
+              // ),
             ],
           ),
           SizedBox(
@@ -192,6 +192,18 @@ class _MyHomePageState extends State<MyHomePage> {
                     },
                     child: Text('Update (+)'),
                   ),
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        // _goodDay = _goodDay + 0.2;
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(primary: Colors.green),
+                    child: Text(
+                      'Send Challenge',
+                      style: TextStyle(fontSize: 10),
+                    ),
+                  ),
                 ],
               ),
               Column(
@@ -232,6 +244,18 @@ class _MyHomePageState extends State<MyHomePage> {
                       });
                     },
                     child: Text('Update (+)'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        // _goodDay = _goodDay + 0.2;
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(primary: Colors.green),
+                    child: Text(
+                      'Send Challenge',
+                      style: TextStyle(fontSize: 10),
+                    ),
                   ),
                 ],
               )
@@ -276,6 +300,18 @@ class _MyHomePageState extends State<MyHomePage> {
                       });
                     },
                     child: Text('Update (+)'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        // _goodDay = _goodDay + 0.2;
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(primary: Colors.green),
+                    child: Text(
+                      'Send Challenge',
+                      style: TextStyle(fontSize: 10),
+                    ),
                   ),
                 ],
               ),
@@ -403,16 +439,16 @@ class _MyHomePageState extends State<MyHomePage> {
             onTap: _onItemTapped,
             items: const [
               BottomNavigationBarItem(
+                icon: Icon(Icons.task),
+                label: 'Quiz',
+              ),
+              BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 label: 'My Profile',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.task),
                 label: 'Volunteer',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.task),
-                label: 'Challenges',
               ),
             ],
           ),
