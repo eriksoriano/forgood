@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(
         title: 'Introvert Helper',
@@ -33,7 +33,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedTabIndex = 0;
-  double _smile = 0.0;
+  double _pickup = 0.0;
   double _metSomeone = 0.0;
   double _wentOutside = 0.0;
   double _goodDay = 0.0;
@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 // start of widget for entire SCREEN for profile tab
   Widget _profileScreen() {
-    final size = 100.0;
+    final size = 80.0;
 
     return Container(
       child: Column(
@@ -87,6 +87,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     'Pick Up  Litter',
                     style: TextStyle(fontSize: 20),
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Text(
                     "Completed 1/5",
                     style: TextStyle(fontSize: 15),
@@ -103,16 +106,19 @@ class _MyHomePageState extends State<MyHomePage> {
                       strokeWidth: 10,
                       color: Colors.red,
                       backgroundColor: Colors.grey,
-                      value: _smile,
+                      value: _pickup,
                     ),
                   ),
-                  RaisedButton(
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        _smile = _smile + 0.2;
+                        _pickup = _pickup + 0.2;
                       });
                     },
-                    child: Text('test1'),
+                    child: Text('Update (+)'),
                   ),
                 ],
               ),
@@ -122,9 +128,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     'Donate',
                     style: TextStyle(fontSize: 20),
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Text(
                     "Completed 1/5",
                     style: TextStyle(fontSize: 15),
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   Container(
                     width: size,
@@ -138,13 +150,16 @@ class _MyHomePageState extends State<MyHomePage> {
                       value: _metSomeone,
                     ),
                   ),
-                  RaisedButton(
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ElevatedButton(
                     onPressed: () {
                       setState(() {
                         _metSomeone = _metSomeone + 0.2;
                       });
                     },
-                    child: Text('test2'),
+                    child: Text('Update (+)'),
                   ),
                 ],
               )
@@ -165,7 +180,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     style: TextStyle(fontSize: 20),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   Container(
                     width: size,
@@ -179,13 +194,16 @@ class _MyHomePageState extends State<MyHomePage> {
                       value: _wentOutside,
                     ),
                   ),
-                  RaisedButton(
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ElevatedButton(
                     onPressed: () {
                       setState(() {
                         _wentOutside = _wentOutside + 0.2;
                       });
                     },
-                    child: Text('test3'),
+                    child: Text('Update (+)'),
                   ),
                 ],
               ),
@@ -193,10 +211,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Text(
                     'Make Someone Smile',
-                    style: TextStyle(fontSize: 10),
+                    style: TextStyle(fontSize: 15),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   Container(
                     width: size,
@@ -210,32 +228,35 @@ class _MyHomePageState extends State<MyHomePage> {
                       value: _goodDay,
                     ),
                   ),
-                  RaisedButton(
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ElevatedButton(
                     onPressed: () {
                       setState(() {
                         _goodDay = _goodDay + 0.2;
                       });
                     },
-                    child: Text('test4'),
+                    child: Text('Update (+)'),
                   ),
                 ],
               ),
             ],
           ),
-          SizedBox(
-            height: 10,
-          ),
-
-          RaisedButton(
+          ElevatedButton(
             onPressed: () {
               setState(() {
-                _smile = 0.0;
+                _pickup = 0.0;
                 _metSomeone = 0.0;
                 _wentOutside = 0.0;
                 _goodDay = 0.0;
               });
             },
-            child: Text('RESET ALL'),
+            style: ElevatedButton.styleFrom(primary: Colors.black),
+            child: Text(
+              'Reset All',
+              style: TextStyle(fontSize: 20),
+            ),
           ),
         ],
       ),
@@ -250,11 +271,11 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _selectTab() {
     switch (_selectedTabIndex) {
       case 0:
-        return const Center(child: Icon(Icons.home, size: 200));
+        return _profileScreen();
       case 1:
         return const Center(child: Icon(Icons.task, size: 200));
       case 2:
-        return _profileScreen();
+        return const Center(child: Icon(Icons.task, size: 200));
       default:
         return const Center(child: Icon(Icons.home, size: 200));
     }
@@ -270,9 +291,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     // final size = 80.0;
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text(widget.title),
-      // ),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(30.0),
+        child: AppBar(
+          title: Text(widget.title),
+        ),
+      ),
       body: Center(
         child: _selectTab(),
       ),
@@ -523,8 +547,8 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Suggestions',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+            icon: Icon(Icons.task),
+            label: 'Challenges',
           ),
         ],
       ),
