@@ -32,6 +32,78 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+// **************************************************************************
+// the list of items in the list below; this will be moved into a new page
+// **************************************************************************
+  final List<int> _items = List<int>.generate(20, (int index) => index);
+
+  // List<String> tasks = [
+  //   "A Task",
+  //   "B Task",
+  //   "C Task",
+  //   "D Task",
+  //   "E Task",
+  //   "F Task",
+  //   "G Task",
+  //   "H Task"
+  // ];
+  @override
+  Widget _listofOpportunities() {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final Color oddItemColor = colorScheme.primary.withOpacity(0.05);
+    final Color evenItemColor = colorScheme.primary.withOpacity(0.15);
+
+    return ReorderableListView(
+      padding: const EdgeInsets.symmetric(horizontal: 40),
+      children: <Widget>[
+        for (int index = 0; index < _items.length; index += 1)
+          ListTile(
+            key: Key('$index'),
+            tileColor: _items[index].isOdd ? oddItemColor : evenItemColor,
+            title: Text('Suggestion ${_items[index]}'),
+          ),
+      ],
+      onReorder: (int oldIndex, int newIndex) {
+        setState(() {
+          if (oldIndex < newIndex) {
+            newIndex -= 1;
+          }
+          final int item = _items.removeAt(oldIndex);
+          _items.insert(newIndex, item);
+        });
+      },
+    );
+    // return Container(
+    //   padding: EdgeInsets.all(8.0),
+    //   child: ReorderableListView(
+    //       children: [
+    //         for (final task in tasks)
+    //           Card(
+    //             color: Colors.lightBlueAccent.shade100,
+    //             key: ValueKey(task),
+    //             elevation: 5.0,
+    //             child: ListTile(
+    //               title: Text(task),
+    //               leading: Icon(Icons.work, color: Colors.black),
+    //             ),
+    //           ),
+    //       ],
+    //       onReorder: (oldIndex, newIndex) {
+    //         setState(() {
+    //           if (newIndex > oldIndex) {
+    //             newIndex = newIndex - 1;
+    //           }
+    //         });
+    //         final task = tasks.removeAt(oldIndex);
+    //         tasks.insert(newIndex, task);
+    //       }),
+    // );
+  }
+
+// **************************************************************************
+  // these are GLOBAL functions to avoid the four main challenge rings
+  // **************************************************************************
+
   int _selectedTabIndex = 0;
   double _pickup = 0.0;
   double _metSomeone = 0.0;
@@ -46,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 // start of widget for entire SCREEN for profile tab
   Widget _profileScreen() {
-    final size = 80.0;
+    final size = 100.0;
 
     return Container(
       child: Column(
@@ -176,7 +248,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Column(
                 children: [
                   Text(
-                    'Volunteer',
+                    'Donate',
                     style: TextStyle(fontSize: 20),
                   ),
                   SizedBox(
@@ -239,6 +311,18 @@ class _MyHomePageState extends State<MyHomePage> {
                     },
                     child: Text('Update (+)'),
                   ),
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        // _goodDay = _goodDay + 0.2;
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(primary: Colors.green),
+                    child: Text(
+                      'Send Challenge',
+                      style: TextStyle(fontSize: 10),
+                    ),
+                  ),
                 ],
               ),
             ],
@@ -274,8 +358,7 @@ class _MyHomePageState extends State<MyHomePage> {
       case 0:
         return _profileScreen();
       case 1:
-        return Text("list of volunteer opportunities locally goes here",
-            style: TextStyle(fontSize: 30));
+        return _listofOpportunities();
       case 2:
         return Text("Other content will go here once we realize what it is",
             style: TextStyle(fontSize: 30));
@@ -298,6 +381,7 @@ class _MyHomePageState extends State<MyHomePage> {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
+            title: Text("Doo-Good App"),
             bottom: TabBar(
               tabs: [
                 Tab(icon: Icon(Icons.person)),
@@ -324,7 +408,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.task),
-                label: 'Suggestions',
+                label: 'Volunteer',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.task),
