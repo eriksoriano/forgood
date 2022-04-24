@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Container(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           // SizedBox(height: 10.0),
           Row(
@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 padding: EdgeInsets.only(right: 20),
                 child: Image(
                   // width: 300,
-                  height: 100,
+                  height: 60,
                   image: AssetImage("assets/usericon.png"),
                   fit: BoxFit.fitWidth,
                 ),
@@ -75,63 +75,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
           SizedBox(
-            height: 20,
+            height: 10,
           ),
-
-          Column(
-            children: [
-              // Text('SOMETHING HERE'),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              //     Container(
-              //       padding: EdgeInsets.only(right: 20),
-              //       child: Image(
-              //         // width: 300,
-              //         height: 40,
-              //         image: AssetImage("assets/trophy.png"),
-              //         fit: BoxFit.fitWidth,
-              //       ),
-              //     ),
-              //     Container(
-              //       padding: EdgeInsets.only(right: 20),
-              //       child: Image(
-              //         // width: 300,
-              //         height: 40,
-              //         image: AssetImage("assets/trophy.png"),
-              //         fit: BoxFit.fitWidth,
-              //       ),
-              //     ),
-              //     Container(
-              //       padding: EdgeInsets.only(right: 20),
-              //       child: Image(
-              //         // width: 300,
-              //         height: 40,
-              //         image: AssetImage("assets/trophy.png"),
-              //         fit: BoxFit.fitWidth,
-              //       ),
-              //     ),
-              //     Container(
-              //       // padding: EdgeInsets.only(right: 20),
-              //       child: Image(
-              //         // width: 300,
-              //         height: 40,
-              //         image: AssetImage("assets/trophy.png"),
-              //         fit: BoxFit.fitWidth,
-              //       ),
-              //     ),
-              //   ],
-              // ),
-            ],
-          ),
-          // Text('WELCOME INTROVER USER'),
-          // Text(
-          //   'Your Friendly progress below',
-          //   style: Theme.of(context).textTheme.headline6,
-          // ),
           // the row for smiled and met someone
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Column(
                 children: [
@@ -202,9 +150,9 @@ class _MyHomePageState extends State<MyHomePage> {
               )
             ],
           ),
-          SizedBox(
-            height: 10,
-          ),
+          // SizedBox(
+          //   height: 10,
+          // ),
 
           // the row for went outwside and good day below
           Row(
@@ -215,6 +163,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   Text(
                     'Volunteer',
                     style: TextStyle(fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: 20,
                   ),
                   Container(
                     width: size,
@@ -242,7 +193,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Text(
                     'Make Someone Smile',
-                    style: TextStyle(fontSize: 15),
+                    style: TextStyle(fontSize: 10),
+                  ),
+                  SizedBox(
+                    height: 20,
                   ),
                   Container(
                     width: size,
