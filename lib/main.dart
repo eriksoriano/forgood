@@ -130,6 +130,12 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _incrementCounter() {
+    setState(() {
+      progress = progress + 1;
+    });
+  }
+
 // **************************************************************************
   // widget below is for the 4 main rings profile
   // **************************************************************************
@@ -211,10 +217,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
+                        _incrementCounter();
                         if (_pickup == 1) {
                           complete1 = "100%";
                         } else {
                           _pickup = _pickup + 0.2;
+                          // complete1 = '$progress';
                         }
                       });
                     },
