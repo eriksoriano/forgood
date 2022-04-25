@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -35,74 +37,80 @@ class _MyHomePageState extends State<MyHomePage> {
 // **************************************************************************
 // the list of items in the list below; this will be moved into a new page
 // **************************************************************************
-  final List<int> _items = List<int>.generate(20, (int index) => index);
+  final List<int> _items = List<int>.generate(6, (int index) => index);
 
-  // List<String> tasks = [
-  //   "A Task",
-  //   "B Task",
-  //   "C Task",
-  //   "D Task",
-  //   "E Task",
-  //   "F Task",
-  //   "G Task",
-  //   "H Task"
-  // ];
+  List<String> tasks = [
+    "Pick Up Litter",
+    "Donate To Needy",
+    "Help Someone In Need",
+    "Make Someone Smile",
+    "Tutor Someone For Free",
+    "Buy Someone Food",
+    "Give Someone Praise",
+    "Open The Door For Someone"
+  ];
 
-  @override
+// **************************************************************************
+// these are CHALLENGE OPPORTUNITIES based on quiz user fills out
+// **************************************************************************
+
+  // @override
   Widget _listofOpportunities() {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final Color oddItemColor = colorScheme.primary.withOpacity(0.05);
-    final Color evenItemColor = colorScheme.primary.withOpacity(0.15);
+    final Color evenItemColor = colorScheme.primary.withOpacity(0.25);
 
-    return ReorderableListView(
-      padding: const EdgeInsets.symmetric(horizontal: 40),
-      children: <Widget>[
-        for (int index = 0; index < _items.length; index += 1)
-          ListTile(
-            key: Key('$index'),
-            tileColor: _items[index].isOdd ? oddItemColor : evenItemColor,
-            title: Text('Suggestion ${_items[index]}'),
-          ),
-      ],
-      onReorder: (int oldIndex, int newIndex) {
-        setState(() {
-          if (oldIndex < newIndex) {
-            newIndex -= 1;
-          }
-          final int item = _items.removeAt(oldIndex);
-          _items.insert(newIndex, item);
-        });
-      },
+    return Container(
+      padding: EdgeInsets.all(8.0),
+      child: ReorderableListView(
+          children: <Widget>[
+            for (final task in tasks)
+              Card(
+                color: Colors.lightBlueAccent.shade100,
+                key: ValueKey(task),
+                elevation: 5.0,
+                child: ListTile(
+                  title: Text(task),
+                  leading: Icon(Icons.task, color: Colors.black),
+                ),
+              ),
+          ],
+          onReorder: (oldIndex, newIndex) {
+            setState(() {
+              if (newIndex > oldIndex) {
+                newIndex = newIndex - 1;
+              }
+            });
+            final task = tasks.removeAt(oldIndex);
+            tasks.insert(newIndex, task);
+          }),
     );
-    // return Container(
-    //   padding: EdgeInsets.all(8.0),
-    //   child: ReorderableListView(
-    //       children: [
-    //         for (final task in tasks)
-    //           Card(
-    //             color: Colors.lightBlueAccent.shade100,
-    //             key: ValueKey(task),
-    //             elevation: 5.0,
-    //             child: ListTile(
-    //               title: Text(task),
-    //               leading: Icon(Icons.work, color: Colors.black),
-    //             ),
-    //           ),
-    //       ],
-    //       onReorder: (oldIndex, newIndex) {
-    //         setState(() {
-    //           if (newIndex > oldIndex) {
-    //             newIndex = newIndex - 1;
-    //           }
-    //         });
-    //         final task = tasks.removeAt(oldIndex);
-    //         tasks.insert(newIndex, task);
-    //       }),
-    // );
+  }
+
+  @override
+  Widget _acceptChallenge() {
+    bool challenge1 = false;
+    bool challenge2 = false;
+    bool challenge3 = false;
+    bool challenge4 = false;
+
+    return Row(
+      children: [
+        Text("Challenge"),
+        Checkbox(
+          value: challenge1,
+          onChanged: (bool? value) {
+            setState(() {
+              challenge1 = false;
+            });
+          },
+        ),
+      ],
+    );
   }
 
 // **************************************************************************
-  // these are GLOBAL functions to avoid the four main challenge rings
+  // these are GLOBAL variables  to for the four main challenge rings
   // **************************************************************************
 
   int _selectedTabIndex = 0;
@@ -110,6 +118,11 @@ class _MyHomePageState extends State<MyHomePage> {
   double _donate = 0.0;
   double _help = 0.0;
   double _smile = 0.0;
+  int progress = 0;
+  String complete1 = "";
+  String complete2 = "";
+  String complete3 = "";
+  String complete4 = "";
 
   void _onItemTapped(int index) {
     setState(() {
@@ -117,13 +130,16 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-// start of widget for entire SCREEN for profile tab
+// **************************************************************************
+  // widget below is for the 4 main rings profile
+  // **************************************************************************
   Widget _profileScreen() {
-    final size = 100.0;
+    final size = 80.0;
+    final ringWidth = 10.0;
 
     return Container(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           // SizedBox(height: 10.0),
           Row(
@@ -152,16 +168,13 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           // the row for smiled and met someone
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Column(
                 children: [
                   Text(
-                    'Pick Up',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  SizedBox(
-                    height: 10,
+                    'Pick Up Street Litter',
+                    style: TextStyle(fontSize: 18),
                   ),
                   SizedBox(
                     height: 10,
@@ -175,15 +188,18 @@ class _MyHomePageState extends State<MyHomePage> {
                       fit: StackFit.expand,
                       children: [
                         CircularProgressIndicator(
-                          strokeWidth: 10,
+                          strokeWidth: ringWidth,
                           color: Colors.red,
                           backgroundColor: Colors.grey,
                           value: _pickup,
                         ),
                         Center(
                           child: Text(
-                            "0%",
-                            style: TextStyle(fontSize: 30),
+                            complete1,
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
                           ),
                         )
                       ],
@@ -195,7 +211,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        _pickup = _pickup + 0.2;
+                        if (_pickup == 1) {
+                          complete1 = "100%";
+                        } else {
+                          _pickup = _pickup + 0.2;
+                        }
                       });
                     },
                     child: Text('Update (+)'),
@@ -217,11 +237,8 @@ class _MyHomePageState extends State<MyHomePage> {
               Column(
                 children: [
                   Text(
-                    'Donate',
+                    'Donate To Needy',
                     style: TextStyle(fontSize: 20),
-                  ),
-                  SizedBox(
-                    height: 10,
                   ),
                   SizedBox(
                     height: 10,
@@ -235,15 +252,18 @@ class _MyHomePageState extends State<MyHomePage> {
                       fit: StackFit.expand,
                       children: [
                         CircularProgressIndicator(
-                          strokeWidth: 10,
+                          strokeWidth: ringWidth,
                           color: Colors.orange,
                           backgroundColor: Colors.grey,
                           value: _donate,
                         ),
                         Center(
                           child: Text(
-                            "0%",
-                            style: TextStyle(fontSize: 30),
+                            complete2,
+                            style: TextStyle(
+                                color: Colors.orange,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
                           ),
                         )
                       ],
@@ -255,7 +275,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        _donate = _donate + 0.2;
+                        if (_donate == 1) {
+                          complete2 = "100%";
+                        } else {
+                          _donate = _donate + 0.2;
+                        }
                       });
                     },
                     child: Text('Update (+)'),
@@ -287,8 +311,8 @@ class _MyHomePageState extends State<MyHomePage> {
               Column(
                 children: [
                   Text(
-                    'Help Someone',
-                    style: TextStyle(fontSize: 20),
+                    'Help Someone Today',
+                    style: TextStyle(fontSize: 15),
                   ),
                   SizedBox(
                     height: 10,
@@ -302,15 +326,18 @@ class _MyHomePageState extends State<MyHomePage> {
                       fit: StackFit.expand,
                       children: [
                         CircularProgressIndicator(
-                          strokeWidth: 10,
-                          color: Colors.purple,
+                          strokeWidth: ringWidth,
+                          color: Colors.deepPurple,
                           backgroundColor: Colors.grey,
                           value: _help,
                         ),
                         Center(
                           child: Text(
-                            "0%",
-                            style: TextStyle(fontSize: 30),
+                            complete3,
+                            style: TextStyle(
+                                color: Colors.deepPurple,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
                           ),
                         )
                       ],
@@ -322,7 +349,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        _help = _help + 0.2;
+                        if (_help == 1) {
+                          complete3 = "100%";
+                        } else {
+                          _help = _help + 0.2;
+                        }
                       });
                     },
                     child: Text('Update (+)'),
@@ -345,7 +376,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Text(
                     'Make Someone Smile',
-                    style: TextStyle(fontSize: 10),
+                    style: TextStyle(fontSize: 15),
                   ),
                   SizedBox(
                     height: 10,
@@ -359,15 +390,18 @@ class _MyHomePageState extends State<MyHomePage> {
                       fit: StackFit.expand,
                       children: [
                         CircularProgressIndicator(
-                          strokeWidth: 10,
+                          strokeWidth: ringWidth,
                           color: Colors.pink,
                           backgroundColor: Colors.grey,
                           value: _smile,
                         ),
                         Center(
                           child: Text(
-                            "0%",
-                            style: TextStyle(fontSize: 30),
+                            complete4,
+                            style: TextStyle(
+                                color: Colors.pink,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
                           ),
                         )
                       ],
@@ -379,7 +413,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        _smile = _smile + 0.2;
+                        if (_smile == 1) {
+                          complete4 = "100%";
+                        } else {
+                          _smile = _smile + 0.2;
+                        }
                       });
                     },
                     child: Text('Update (+)'),
@@ -407,6 +445,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 _donate = 0.0;
                 _help = 0.0;
                 _smile = 0.0;
+                complete1 = "";
+                complete2 = "";
+                complete3 = "";
+                complete4 = "";
               });
             },
             style: ElevatedButton.styleFrom(primary: Colors.black),
@@ -463,13 +505,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           body: TabBarView(
-            children: [
-              _selectTab(),
-              Text(
-                "Here is the list of challenges/where user can choose to accept or decline, etc.",
-                style: TextStyle(fontSize: 40),
-              ),
-            ],
+            children: [_selectTab(), _acceptChallenge()],
           ),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: _selectedTabIndex,
