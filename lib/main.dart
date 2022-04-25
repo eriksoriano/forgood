@@ -46,8 +46,6 @@ class _MyHomePageState extends State<MyHomePage> {
     "Make Someone Smile",
     "Tutor Someone For Free",
     "Buy Someone Food",
-    "Give Someone Praise",
-    "Open The Door For Someone"
   ];
 
 // **************************************************************************
@@ -130,11 +128,11 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _incrementCounter() {
-    setState(() {
-      progress = progress + 1;
-    });
-  }
+  // void _incrementCounter() {
+  //   setState(() {
+  //     progress = progress + 1;
+  //   });
+  // }
 
 // **************************************************************************
   // widget below is for the 4 main rings profile
@@ -217,7 +215,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        _incrementCounter();
                         if (_pickup == 1) {
                           complete1 = "100%";
                         } else {
@@ -228,18 +225,18 @@ class _MyHomePageState extends State<MyHomePage> {
                     },
                     child: Text('Update (+)'),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        // _goodDay = _goodDay + 0.2;
-                      });
-                    },
-                    style: ElevatedButton.styleFrom(primary: Colors.green),
-                    child: Text(
-                      'Send Challenge',
-                      style: TextStyle(fontSize: 10),
-                    ),
-                  ),
+                  // ElevatedButton(
+                  //   onPressed: () {
+                  //     setState(() {
+                  //       // _goodDay = _goodDay + 0.2;
+                  //     });
+                  //   },
+                  //   style: ElevatedButton.styleFrom(primary: Colors.green),
+                  //   child: Text(
+                  //     'Send Challenge',
+                  //     style: TextStyle(fontSize: 10),
+                  //   ),
+                  // ),
                 ],
               ),
               Column(
@@ -292,18 +289,18 @@ class _MyHomePageState extends State<MyHomePage> {
                     },
                     child: Text('Update (+)'),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        // _goodDay = _goodDay + 0.2;
-                      });
-                    },
-                    style: ElevatedButton.styleFrom(primary: Colors.green),
-                    child: Text(
-                      'Send Challenge',
-                      style: TextStyle(fontSize: 10),
-                    ),
-                  ),
+                  // ElevatedButton(
+                  //   onPressed: () {
+                  //     setState(() {
+                  //       // _goodDay = _goodDay + 0.2;
+                  //     });
+                  //   },
+                  //   style: ElevatedButton.styleFrom(primary: Colors.green),
+                  //   child: Text(
+                  //     'Send Challenge',
+                  //     style: TextStyle(fontSize: 10),
+                  //   ),
+                  // ),
                 ],
               )
             ],
@@ -366,18 +363,18 @@ class _MyHomePageState extends State<MyHomePage> {
                     },
                     child: Text('Update (+)'),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        // _goodDay = _goodDay + 0.2;
-                      });
-                    },
-                    style: ElevatedButton.styleFrom(primary: Colors.green),
-                    child: Text(
-                      'Send Challenge',
-                      style: TextStyle(fontSize: 10),
-                    ),
-                  ),
+                  // ElevatedButton(
+                  //   onPressed: () {
+                  //     setState(() {
+                  //       // _goodDay = _goodDay + 0.2;
+                  //     });
+                  //   },
+                  //   style: ElevatedButton.styleFrom(primary: Colors.green),
+                  //   child: Text(
+                  //     'Send Challenge',
+                  //     style: TextStyle(fontSize: 10),
+                  //   ),
+                  // ),
                 ],
               ),
               Column(
@@ -430,18 +427,18 @@ class _MyHomePageState extends State<MyHomePage> {
                     },
                     child: Text('Update (+)'),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        // _goodDay = _goodDay + 0.2;
-                      });
-                    },
-                    style: ElevatedButton.styleFrom(primary: Colors.green),
-                    child: Text(
-                      'Send Challenge',
-                      style: TextStyle(fontSize: 10),
-                    ),
-                  ),
+                  // ElevatedButton(
+                  //   onPressed: () {
+                  //     setState(() {
+                  //       // _goodDay = _goodDay + 0.2;
+                  //     });
+                  //   },
+                  //   style: ElevatedButton.styleFrom(primary: Colors.green),
+                  //   child: Text(
+                  //     'Send Challenge',
+                  //     style: TextStyle(fontSize: 10),
+                  //   ),
+                  // ),
                 ],
               ),
             ],
@@ -479,12 +476,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _selectTab() {
     switch (_selectedTabIndex) {
       case 0:
-        return _listofOpportunities();
+        return Text("Quiz will go here bro", style: TextStyle(fontSize: 30));
       case 1:
         return _profileScreen();
-      case 2:
-        return Text("Other content will go here once we realize what it is",
-            style: TextStyle(fontSize: 30));
+      // case 2:
+      //   return Text("Other content will go here once we realize what it is",
+      //       style: TextStyle(fontSize: 30));
       default:
         return const Center(child: Icon(Icons.home, size: 200));
     }
@@ -513,7 +510,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           body: TabBarView(
-            children: [_selectTab(), _acceptChallenge()],
+            children: [_selectTab(), _listofOpportunities()],
           ),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: _selectedTabIndex,
@@ -527,10 +524,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 icon: Icon(Icons.person),
                 label: 'My Profile',
               ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.task),
-                label: 'Volunteer',
-              ),
+              // BottomNavigationBarItem(
+              //   icon: Icon(Icons.task),
+              //   label: 'Volunteer',
+              // ),
             ],
           ),
         ),
