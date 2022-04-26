@@ -507,7 +507,12 @@ class _MyHomePageState extends State<MyHomePage> {
     // final size = 80.0;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Doo-Good App"),
+        centerTitle: true,
+        title: Image.asset(
+          'assets/Asset2.png',
+          fit: BoxFit.fitWidth,
+          width: 50,
+        ),
       ),
       body: Center(
         child: _selectTab(),
