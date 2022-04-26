@@ -110,6 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
 // **************************************************************************
   // these are GLOBAL variables  to for the four main challenge rings
   // **************************************************************************
+  int _counter = 0;
 
   int _selectedTabIndex = 0;
   double _pickup = 0.0;
@@ -128,11 +129,16 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  // void _incrementCounter() {
-  //   setState(() {
-  //     progress = progress + 1;
-  //   });
-  // }
+  void _incrementCounter() {
+    setState(() {
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen.
+      _counter++;
+    });
+  }
 
 // **************************************************************************
   // widget below is for the 4 main rings profile
@@ -476,14 +482,17 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _selectTab() {
     switch (_selectedTabIndex) {
       case 0:
-        return Text("Quiz will go here bro", style: TextStyle(fontSize: 30));
+        return Text("quiz will go here after ayesha finish",
+            style: TextStyle(fontSize: 30));
       case 1:
         return _profileScreen();
-      // case 2:
-      //   return Text("Other content will go here once we realize what it is",
-      //       style: TextStyle(fontSize: 30));
+      case 2:
+        return _listofOpportunities();
+      case 3:
+        return Text("Other content will go here once we realize what it is",
+            style: TextStyle(fontSize: 30));
       default:
-        return const Center(child: Icon(Icons.home, size: 200));
+        return const Center(child: Icon(Icons.home, size: 20));
     }
   }
   // widget that changes tabs and each case is a screen (containing their own widget)
@@ -496,41 +505,58 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     // final size = 80.0;
-    return MaterialApp(
-      home: DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text("Doo-Good App"),
-            bottom: TabBar(
-              tabs: [
-                Tab(icon: Icon(Icons.person)),
-                Tab(icon: Icon(Icons.notifications)),
-              ],
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Doo-Good App"),
+      ),
+      body: Center(
+        child: _selectTab(),
+        // child: Column(
+        //   mainAxisAlignment: MainAxisAlignment.end,
+        //   children: [
+        //     Row(
+        //       mainAxisAlignment: MainAxisAlignment.end,
+        //       children: [
+        //         FloatingActionButton(
+        //           onPressed: _incrementCounter,
+        //           tooltip: 'Increment',
+        //           child: const Icon(
+        //             Icons.info_outline_rounded,
+        //             size: 50,
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //     SizedBox(
+        //       height: 40,
+        //     ),
+        //   ],
+        // ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        // backgroundColor: Colors.black,
+        fixedColor: Colors.amber,
+        currentIndex: _selectedTabIndex,
+        onTap: _onItemTapped,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.task),
+            label: 'Quiz',
           ),
-          body: TabBarView(
-            children: [_selectTab(), _listofOpportunities()],
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: _selectedTabIndex,
-            onTap: _onItemTapped,
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.task),
-                label: 'Quiz',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: 'My Profile',
-              ),
-              // BottomNavigationBarItem(
-              //   icon: Icon(Icons.task),
-              //   label: 'Volunteer',
-              // ),
-            ],
+          BottomNavigationBarItem(
+            icon: Icon(Icons.task),
+            label: 'Challenges',
           ),
-        ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
       ),
     );
   }
