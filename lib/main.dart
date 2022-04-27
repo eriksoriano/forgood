@@ -66,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             for (final task in tasks)
               Card(
-                color: Colors.lightBlueAccent.shade100,
+                color: Colors.tealAccent,
                 key: ValueKey(task),
                 elevation: 5.0,
                 child: ListTile(
@@ -79,6 +79,12 @@ class _MyHomePageState extends State<MyHomePage> {
             setState(() {
               if (oldIndex < newIndex) {
                 newIndex = newIndex - 1;
+                challenge1 = tasks[0];
+                challenge2 = tasks[1];
+                challenge3 = tasks[2];
+                challenge4 = tasks[3];
+              } else if (oldIndex > newIndex) {
+                newIndex = oldIndex;
                 challenge1 = tasks[0];
                 challenge2 = tasks[1];
                 challenge3 = tasks[2];
