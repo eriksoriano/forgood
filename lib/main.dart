@@ -162,7 +162,7 @@ class _MyHomePageState extends State<MyHomePage> {
   // widget below is for the 4 main rings profile
   // **************************************************************************
   Widget _profileScreen() {
-    final size = 130.0;
+    final size = 140.0;
     final ringWidth = 10.0;
 
     return Container(
@@ -583,7 +583,7 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
         title: new Text(
           'ForGood',
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 30),
         ),
         actions: [
           // action button
