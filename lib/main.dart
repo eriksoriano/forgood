@@ -15,10 +15,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Final App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.teal,
       ),
       home: const MyHomePage(
-        title: 'Introvert Helper',
+        title: 'For Good App',
       ),
     );
   }
@@ -37,15 +37,17 @@ class _MyHomePageState extends State<MyHomePage> {
 // **************************************************************************
 // the list of items in the list below; this will be moved into a new page
 // **************************************************************************
-  final List<int> _items = List<int>.generate(6, (int index) => index);
+  final List<int> _items = List<int>.generate(8, (int index) => index);
 
   List<String> tasks = [
     "Pick Up Litter",
     "Donate To Needy",
-    "Help Someone In Need",
+    "Help Someone",
     "Make Someone Smile",
     "Tutor Someone For Free",
     "Buy Someone Food",
+    "Buy Someone Water",
+    "Buy Someone Fruits"
   ];
 
 // **************************************************************************
@@ -55,8 +57,8 @@ class _MyHomePageState extends State<MyHomePage> {
   // @override
   Widget _listofOpportunities() {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final Color oddItemColor = colorScheme.primary.withOpacity(0.05);
-    final Color evenItemColor = colorScheme.primary.withOpacity(0.25);
+    final Color oddItemColor = Color.fromRGBO(139, 200, 89, 1);
+    final Color evenItemColor = Color.fromRGBO(101, 189, 184, 1);
 
     return Container(
       padding: EdgeInsets.all(8.0),
@@ -75,8 +77,12 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
           onReorder: (oldIndex, newIndex) {
             setState(() {
-              if (newIndex > oldIndex) {
+              if (oldIndex < newIndex) {
                 newIndex = newIndex - 1;
+                challenge1 = tasks[0];
+                challenge2 = tasks[1];
+                challenge3 = tasks[2];
+                challenge4 = tasks[3];
               }
             });
             final task = tasks.removeAt(oldIndex);
@@ -110,13 +116,19 @@ class _MyHomePageState extends State<MyHomePage> {
 // **************************************************************************
   // these are GLOBAL variables  to for the four main challenge rings
   // **************************************************************************
+
+  String challenge1 = "";
+  String challenge2 = "";
+  String challenge3 = "";
+  String challenge4 = "";
+
   int _counter = 0;
 
   int _selectedTabIndex = 0;
-  double _pickup = 0.0;
-  double _donate = 0.0;
-  double _help = 0.0;
-  double _smile = 0.0;
+  double ring1 = 0.0;
+  double ring2 = 0.0;
+  double ring3 = 0.0;
+  double ring4 = 0.0;
   int progress = 0;
   String complete1 = "";
   String complete2 = "";
@@ -144,47 +156,45 @@ class _MyHomePageState extends State<MyHomePage> {
   // widget below is for the 4 main rings profile
   // **************************************************************************
   Widget _profileScreen() {
-    final size = 80.0;
+    final size = 110.0;
     final ringWidth = 10.0;
 
     return Container(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           // SizedBox(height: 10.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Container(
-              //   padding: EdgeInsets.only(right: 20),
-              //   child: Image(
-              //     // width: 300,
-              //     height: 60,
-              //     image: AssetImage("assets/usericon.png"),
-              //     fit: BoxFit.fitWidth,
-              //   ),
-              // ),
-              // Text(
-              //   "Your Name Bro",
-              //   style: TextStyle(
-              //     fontSize: 25,
-              //     fontWeight: FontWeight.bold,
-              //   ),
-              // ),
+              Container(
+                padding: EdgeInsets.only(right: 20),
+                child: Image(
+                  // width: 300,
+                  height: 50,
+                  image: AssetImage("assets/usericon.png"),
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
+              Text(
+                "Erik Soriano",
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ],
-          ),
-          SizedBox(
-            height: 10,
           ),
           // the row for smiled and met someone
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Column(
                 children: [
                   Text(
-                    'Pick Up Street Litter',
-                    style: TextStyle(fontSize: 18),
+                    challenge1,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 15),
                   ),
                   SizedBox(
                     height: 10,
@@ -199,15 +209,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: [
                         CircularProgressIndicator(
                           strokeWidth: ringWidth,
-                          color: Colors.red,
+                          color: Color.fromRGBO(120, 195, 137, 1),
                           backgroundColor: Colors.grey,
-                          value: _pickup,
+                          value: ring1,
                         ),
                         Center(
                           child: Text(
                             complete1,
                             style: TextStyle(
-                                color: Colors.red,
+                                color: Color.fromRGBO(120, 195, 137, 1),
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -221,35 +231,40 @@ class _MyHomePageState extends State<MyHomePage> {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        if (_pickup == 1) {
+                        if (ring1 == 1) {
                           complete1 = "100%";
-                        } else {
-                          _pickup = _pickup + 0.2;
+                        } else if (ring1 < 0.2) {
+                          ring1 = ring1 + 0.2;
                           // complete1 = '$progress';
+                          complete1 = "20%";
+                        } else if (ring1 < 0.4) {
+                          ring1 = ring1 + 0.2;
+                          // complete1 = '$progress';
+                          complete1 = "40%";
+                        } else if (ring1 < 0.6) {
+                          ring1 = ring1 + 0.2;
+                          // complete1 = '$progress';
+                          complete1 = "60%";
+                        } else if (ring1 < 0.8) {
+                          ring1 = ring1 + 0.2;
+                          // complete1 = '$progress';
+                          complete1 = "80%";
+                        } else if (ring1 == 0.8) {
+                          ring1 = ring1 + 0.2;
+                          // complete1 = '$progress';
+                          complete1 = "100%";
                         }
                       });
                     },
-                    child: Text('Update (+)'),
+                    child: Text('Add Progress'),
                   ),
-                  // ElevatedButton(
-                  //   onPressed: () {
-                  //     setState(() {
-                  //       // _goodDay = _goodDay + 0.2;
-                  //     });
-                  //   },
-                  //   style: ElevatedButton.styleFrom(primary: Colors.green),
-                  //   child: Text(
-                  //     'Send Challenge',
-                  //     style: TextStyle(fontSize: 10),
-                  //   ),
-                  // ),
                 ],
               ),
               Column(
                 children: [
                   Text(
-                    'Donate To Needy',
-                    style: TextStyle(fontSize: 20),
+                    challenge2,
+                    style: TextStyle(fontSize: 15),
                   ),
                   SizedBox(
                     height: 10,
@@ -264,15 +279,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: [
                         CircularProgressIndicator(
                           strokeWidth: ringWidth,
-                          color: Colors.orange,
+                          color: Color.fromRGBO(101, 189, 184, 1),
                           backgroundColor: Colors.grey,
-                          value: _donate,
+                          value: ring2,
                         ),
                         Center(
                           child: Text(
                             complete2,
                             style: TextStyle(
-                                color: Colors.orange,
+                                color: Color.fromRGBO(101, 189, 184, 1),
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -286,43 +301,45 @@ class _MyHomePageState extends State<MyHomePage> {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        if (_donate == 1) {
+                        if (ring2 == 1) {
                           complete2 = "100%";
-                        } else {
-                          _donate = _donate + 0.2;
+                        } else if (ring2 < 0.2) {
+                          ring2 = ring2 + 0.2;
+                          // complete1 = '$progress';
+                          complete2 = "20%";
+                        } else if (ring2 < 0.4) {
+                          ring2 = ring2 + 0.2;
+                          // complete1 = '$progress';
+                          complete2 = "40%";
+                        } else if (ring2 < 0.6) {
+                          ring2 = ring2 + 0.2;
+                          // complete1 = '$progress';
+                          complete2 = "60%";
+                        } else if (ring2 < 0.8) {
+                          ring2 = ring2 + 0.2;
+                          // complete1 = '$progress';
+                          complete2 = "80%";
+                        } else if (ring2 == 0.8) {
+                          ring2 = ring2 + 0.2;
+                          // complete1 = '$progress';
+                          complete2 = "100%";
                         }
                       });
                     },
-                    child: Text('Update (+)'),
+                    child: Text('Add Progress'),
                   ),
-                  // ElevatedButton(
-                  //   onPressed: () {
-                  //     setState(() {
-                  //       // _goodDay = _goodDay + 0.2;
-                  //     });
-                  //   },
-                  //   style: ElevatedButton.styleFrom(primary: Colors.green),
-                  //   child: Text(
-                  //     'Send Challenge',
-                  //     style: TextStyle(fontSize: 10),
-                  //   ),
-                  // ),
                 ],
               )
             ],
           ),
-          // SizedBox(
-          //   height: 10,
-          // ),
-
           // the row for went outwside and good day below
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Column(
                 children: [
                   Text(
-                    'Help Someone Today',
+                    challenge3,
                     style: TextStyle(fontSize: 15),
                   ),
                   SizedBox(
@@ -338,15 +355,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: [
                         CircularProgressIndicator(
                           strokeWidth: ringWidth,
-                          color: Colors.deepPurple,
+                          color: Color.fromRGBO(82, 184, 232, 1),
                           backgroundColor: Colors.grey,
-                          value: _help,
+                          value: ring3,
                         ),
                         Center(
                           child: Text(
                             complete3,
                             style: TextStyle(
-                                color: Colors.deepPurple,
+                                color: Color.fromRGBO(82, 184, 232, 1),
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -360,14 +377,32 @@ class _MyHomePageState extends State<MyHomePage> {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        if (_help == 1) {
+                        if (ring3 == 1) {
                           complete3 = "100%";
-                        } else {
-                          _help = _help + 0.2;
+                        } else if (ring3 < 0.2) {
+                          ring3 = ring3 + 0.2;
+                          // complete1 = '$progress';
+                          complete3 = "20%";
+                        } else if (ring3 < 0.4) {
+                          ring3 = ring3 + 0.2;
+                          // complete1 = '$progress';
+                          complete3 = "40%";
+                        } else if (ring3 < 0.6) {
+                          ring3 = ring3 + 0.2;
+                          // complete1 = '$progress';
+                          complete3 = "60%";
+                        } else if (ring3 < 0.8) {
+                          ring3 = ring3 + 0.2;
+                          // complete1 = '$progress';
+                          complete3 = "80%";
+                        } else if (ring3 == 0.8) {
+                          ring3 = ring3 + 0.2;
+                          // complete1 = '$progress';
+                          complete3 = "100%";
                         }
                       });
                     },
-                    child: Text('Update (+)'),
+                    child: Text('Add Progress'),
                   ),
                   // ElevatedButton(
                   //   onPressed: () {
@@ -386,7 +421,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Column(
                 children: [
                   Text(
-                    'Make Someone Smile',
+                    challenge4,
                     style: TextStyle(fontSize: 15),
                   ),
                   SizedBox(
@@ -402,15 +437,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: [
                         CircularProgressIndicator(
                           strokeWidth: ringWidth,
-                          color: Colors.pink,
+                          color: Color.fromRGBO(139, 200, 89, 1),
                           backgroundColor: Colors.grey,
-                          value: _smile,
+                          value: ring4,
                         ),
                         Center(
                           child: Text(
                             complete4,
                             style: TextStyle(
-                                color: Colors.pink,
+                                color: Color.fromRGBO(139, 200, 89, 1),
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -424,14 +459,32 @@ class _MyHomePageState extends State<MyHomePage> {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        if (_smile == 1) {
+                        if (ring4 == 1) {
                           complete4 = "100%";
-                        } else {
-                          _smile = _smile + 0.2;
+                        } else if (ring4 < 0.2) {
+                          ring4 = ring4 + 0.2;
+                          // complete1 = '$progress';
+                          complete4 = "20%";
+                        } else if (ring4 < 0.4) {
+                          ring4 = ring4 + 0.2;
+                          // complete1 = '$progress';
+                          complete4 = "40%";
+                        } else if (ring4 < 0.6) {
+                          ring4 = ring4 + 0.2;
+                          // complete1 = '$progress';
+                          complete4 = "60%";
+                        } else if (ring4 < 0.8) {
+                          ring4 = ring4 + 0.2;
+                          // complete1 = '$progress';
+                          complete4 = "80%";
+                        } else if (ring4 == 0.8) {
+                          ring4 = ring4 + 0.2;
+                          // complete1 = '$progress';
+                          complete4 = "100%";
                         }
                       });
                     },
-                    child: Text('Update (+)'),
+                    child: Text('Add Progress'),
                   ),
                   // ElevatedButton(
                   //   onPressed: () {
@@ -452,19 +505,23 @@ class _MyHomePageState extends State<MyHomePage> {
           ElevatedButton(
             onPressed: () {
               setState(() {
-                _pickup = 0.0;
-                _donate = 0.0;
-                _help = 0.0;
-                _smile = 0.0;
+                ring1 = 0.0;
+                ring2 = 0.0;
+                ring3 = 0.0;
+                ring4 = 0.0;
                 complete1 = "";
                 complete2 = "";
                 complete3 = "";
                 complete4 = "";
+                challenge1 = "";
+                challenge2 = "";
+                challenge3 = "";
+                challenge4 = "";
               });
             },
             style: ElevatedButton.styleFrom(primary: Colors.black),
             child: Text(
-              'Reset All',
+              'Start Again',
               style: TextStyle(fontSize: 20),
             ),
           ),
@@ -478,7 +535,6 @@ class _MyHomePageState extends State<MyHomePage> {
   //----------------------------------------------------------------------------
 
   // widget that changes tabs and each case is a screen (containing their own widget)
-  // this WIDGET is exclusive to the "Profile" bottom tab though
   Widget _selectTab() {
     switch (_selectedTabIndex) {
       case 0:
@@ -497,7 +553,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
   // widget that changes tabs and each case is a screen (containing their own widget)
 
-  // double _smile = 0.0;
+  // double ring4 = 0.0;
   // double _metSomeone = 0.0;
   // double _wentOutside = 0.0;
   // double _goodDay = 0.0;
@@ -506,12 +562,15 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     // final size = 80.0;
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Image.asset(
-          'assets/Asset2.png',
-          fit: BoxFit.fitWidth,
-          width: 50,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(80.0),
+        child: AppBar(
+          centerTitle: true,
+          title: Image.asset(
+            'assets/Asset2.png',
+            fit: BoxFit.contain,
+            width: 50,
+          ),
         ),
       ),
       body: Center(
@@ -541,7 +600,7 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         // backgroundColor: Colors.black,
-        fixedColor: Colors.amber,
+        fixedColor: Colors.black,
         currentIndex: _selectedTabIndex,
         onTap: _onItemTapped,
         items: const [
