@@ -62,6 +62,8 @@ flutter:
     - assets/usericon.png
     - assets/trophy.png
     - assets/Asset2.png
+    - assets/Asset1.png
+
     - assets/es-um.jpg
   #   - images/a_dot_ham.jpeg
 

@@ -162,35 +162,39 @@ class _MyHomePageState extends State<MyHomePage> {
   // widget below is for the 4 main rings profile
   // **************************************************************************
   Widget _profileScreen() {
-    final size = 110.0;
+    final size = 130.0;
     final ringWidth = 10.0;
 
     return Container(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
+          // SizedBox(
+          //   height: 10,
+          // ),
+
           // SizedBox(height: 10.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: EdgeInsets.only(right: 20),
-                child: Image(
-                  // width: 300,
-                  height: 50,
-                  image: AssetImage("assets/usericon.png"),
-                  fit: BoxFit.fitWidth,
-                ),
-              ),
-              Text(
-                "Erik Soriano",
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     Container(
+          //       padding: EdgeInsets.only(right: 20),
+          //       child: Image(
+          //         // width: 300,
+          //         height: 50,
+          //         image: AssetImage("assets/usericon.png"),
+          //         fit: BoxFit.fitWidth,
+          //       ),
+          //     ),
+          //     Text(
+          //       "Erik Soriano",
+          //       style: TextStyle(
+          //         fontSize: 25,
+          //         fontWeight: FontWeight.bold,
+          //       ),
+          //     ),
+          //   ],
+          // ),
           // the row for smiled and met someone
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -224,7 +228,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             complete1,
                             style: TextStyle(
                                 color: Color.fromRGBO(120, 195, 137, 1),
-                                fontSize: 20,
+                                fontSize: 40,
                                 fontWeight: FontWeight.bold),
                           ),
                         )
@@ -294,7 +298,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             complete2,
                             style: TextStyle(
                                 color: Color.fromRGBO(101, 189, 184, 1),
-                                fontSize: 20,
+                                fontSize: 40,
                                 fontWeight: FontWeight.bold),
                           ),
                         )
@@ -370,7 +374,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             complete3,
                             style: TextStyle(
                                 color: Color.fromRGBO(82, 184, 232, 1),
-                                fontSize: 20,
+                                fontSize: 40,
                                 fontWeight: FontWeight.bold),
                           ),
                         )
@@ -452,7 +456,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             complete4,
                             style: TextStyle(
                                 color: Color.fromRGBO(139, 200, 89, 1),
-                                fontSize: 20,
+                                fontSize: 40,
                                 fontWeight: FontWeight.bold),
                           ),
                         )
@@ -508,6 +512,10 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ],
           ),
+          SizedBox(
+            height: 10,
+          ),
+
           ElevatedButton(
             onPressed: () {
               setState(() {
@@ -531,6 +539,9 @@ class _MyHomePageState extends State<MyHomePage> {
               style: TextStyle(fontSize: 20),
             ),
           ),
+          SizedBox(
+            height: 10,
+          ),
         ],
       ),
     );
@@ -550,9 +561,9 @@ class _MyHomePageState extends State<MyHomePage> {
         return _profileScreen();
       case 2:
         return _listofOpportunities();
-      case 3:
-        return Text("Other content will go here once we realize what it is",
-            style: TextStyle(fontSize: 30));
+      // case 3:
+      //   return Text("Other content will go here once we realize what it is",
+      //       style: TextStyle(fontSize: 30));
       default:
         return const Center(child: Icon(Icons.home, size: 20));
     }
@@ -568,40 +579,56 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     // final size = 80.0;
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(80.0),
-        child: AppBar(
-          centerTitle: true,
-          title: Image.asset(
-            'assets/Asset2.png',
-            fit: BoxFit.contain,
-            width: 50,
+      appBar: AppBar(
+        centerTitle: true,
+        title: new Text(
+          'ForGood',
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        ),
+        actions: [
+          // action button
+          IconButton(
+            icon: Icon(Icons.info),
+            iconSize: 40,
+            onPressed: () {},
           ),
+        ],
+        leading: IconButton(
+          icon: Image.asset('assets/Asset1.png'),
+          onPressed: () {},
         ),
       ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _incrementCounter,
+      //   tooltip: 'Increment',
+      //   child: const Icon(
+      //     Icons.info,
+      //     size: 50,
+      //   ),
+      // ),
+      // appBar: PreferredSize(
+      //   preferredSize: Size.fromHeight(80.0),
+      //   child: AppBar(
+      //     // centerTitle: true,
+      //     title: Image.asset(
+      //       'assets/Asset2.png',
+      //       fit: BoxFit.contain,
+      //       width: 50,
+      //     ),
+      //   ),
+      // ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _incrementCounter,
+      //   tooltip: 'Info',
+      //   child: const Icon(
+      //     Icons.info,
+      //     size: 50,
+      //   ),
+      // ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
+
       body: Center(
         child: _selectTab(),
-        // child: Column(
-        //   mainAxisAlignment: MainAxisAlignment.end,
-        //   children: [
-        //     Row(
-        //       mainAxisAlignment: MainAxisAlignment.end,
-        //       children: [
-        //         FloatingActionButton(
-        //           onPressed: _incrementCounter,
-        //           tooltip: 'Increment',
-        //           child: const Icon(
-        //             Icons.info_outline_rounded,
-        //             size: 50,
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //     SizedBox(
-        //       height: 40,
-        //     ),
-        //   ],
-        // ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -622,10 +649,11 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.task),
             label: 'Challenges',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
+
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.person),
+          //   label: 'Profile',
+          // ),
         ],
       ),
     );
