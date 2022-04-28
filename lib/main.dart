@@ -1,4 +1,4 @@
-import 'dart:ffi';
+// import 'dart:ffi';
 import 'package:finalproject/list.dart';
 import 'package:flutter/material.dart';
 
@@ -10,10 +10,11 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
+  // DO NOT DELETE OR MOVE THIS OUTTA HERE
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Final App',
+      title: 'ForGood App',
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
@@ -34,6 +35,39 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+//----------------------------------------------------------------------------------
+// widget that changes tabs and each case is a screen (containing their own widget)
+//----------------------------------------------------------------------------------
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedTabIndex = index;
+    });
+  }
+
+  Widget _selectTab() {
+    switch (_selectedTabIndex) {
+      case 0:
+        return Text("quiz will go here after ayesha finish",
+            style: TextStyle(fontSize: 30));
+      case 1:
+        return _profileScreen();
+      case 2:
+        return _selectOpportunities();
+      default:
+        return const Center(child: Icon(Icons.home, size: 20));
+    }
+  }
+//----------------------------------------------------------------------------------
+// widget that changes tabs and each case is a screen (containing their own widget)
+//----------------------------------------------------------------------------------
+
+// **************************************************************************
+// list below comes from list.dart
+// this lists includes array of all possible challenges users can pick
+// we will have 4 array (lists) based on Ayesha's quiz results
+// **************************************************************************
+
   List<listOpportunities> challengenames = [
     listOpportunities("Pick Up Litter", false),
     listOpportunities("Donate To Needy", false),
@@ -130,12 +164,6 @@ class _MyHomePageState extends State<MyHomePage> {
   String complete2 = "";
   String complete3 = "";
   String complete4 = "";
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedTabIndex = index;
-    });
-  }
 
 // **************************************************************************
   // widget below is for list of opportunities
@@ -581,28 +609,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
   // end of widget for entire SCREEN for profile tab
 
-  //----------------------------------------------------------------------------
-  //----------------------------------------------------------------------------
-
-  // widget that changes tabs and each case is a screen (containing their own widget)
-  Widget _selectTab() {
-    switch (_selectedTabIndex) {
-      case 0:
-        return Text("quiz will go here after ayesha finish",
-            style: TextStyle(fontSize: 30));
-      case 1:
-        return _profileScreen();
-      case 2:
-        return _selectOpportunities();
-      default:
-        return const Center(child: Icon(Icons.home, size: 20));
-    }
-  }
-  // widget that changes tabs and each case is a screen (containing their own widget)
-
   @override
   Widget build(BuildContext context) {
-    // final size = 80.0;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -646,11 +654,6 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.task),
             label: 'Challenges',
           ),
-
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.person),
-          //   label: 'Profile',
-          // ),
         ],
       ),
     );
