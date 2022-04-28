@@ -1,5 +1,5 @@
 import 'dart:ffi';
-
+import 'package:finalproject/list.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -34,90 +34,80 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<listOpportunities> challengenames = [
+    listOpportunities("Pick Up Litter", false),
+    listOpportunities("Donate To Needy", false),
+    listOpportunities("Help Someone", false),
+    listOpportunities("Make Someone Smile", false),
+    listOpportunities("Tutor Someone For Free", false),
+    listOpportunities("Smoke Weed with Somebody", false),
+    listOpportunities("Sing a song", false),
+    listOpportunities("get an A in class", false),
+  ];
+
+  List<listOpportunities> selectedThings = [];
 // **************************************************************************
 // the list of items in the list below; this will be moved into a new page
 // **************************************************************************
-  final List<int> _items = List<int>.generate(8, (int index) => index);
+  // final List<int> _items = List<int>.generate(8, (int index) => index);
 
-  List<String> tasks = [
-    "Pick Up Litter",
-    "Donate To Needy",
-    "Help Someone",
-    "Make Someone Smile",
-    "Tutor Someone For Free",
-    "Buy Someone Food",
-    "Buy Someone Water",
-    "Buy Someone Fruits"
-  ];
+  // List<String> tasks = [
+  //   "Pick Up Litter",
+  //   "Donate To Needy",
+  //   "Help Someone",
+  //   "Make Someone Smile",
+  //   "Tutor Someone For Free",
+  //   "Buy Someone Food",
+  //   "Buy Someone Water",
+  //   "Buy Someone Fruits"
+  // ];
 
 // **************************************************************************
 // these are CHALLENGE OPPORTUNITIES based on quiz user fills out
 // **************************************************************************
 
   // @override
-  Widget _listofOpportunities() {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final Color oddItemColor = Color.fromRGBO(139, 200, 89, 1);
-    final Color evenItemColor = Color.fromRGBO(101, 189, 184, 1);
+  // Widget _listofOpportunities() {
+  //   final ColorScheme colorScheme = Theme.of(context).colorScheme;
+  //   final Color oddItemColor = Color.fromRGBO(139, 200, 89, 1);
+  //   final Color evenItemColor = Color.fromRGBO(101, 189, 184, 1);
 
-    return Container(
-      padding: EdgeInsets.all(8.0),
-      child: ReorderableListView(
-          children: <Widget>[
-            for (final task in tasks)
-              Card(
-                color: Colors.tealAccent,
-                key: ValueKey(task),
-                elevation: 5.0,
-                child: ListTile(
-                  title: Text(task),
-                  leading: Icon(Icons.task, color: Colors.black),
-                ),
-              ),
-          ],
-          onReorder: (oldIndex, newIndex) {
-            setState(() {
-              if (oldIndex < newIndex) {
-                newIndex = newIndex - 1;
-                challenge1 = tasks[0];
-                challenge2 = tasks[1];
-                challenge3 = tasks[2];
-                challenge4 = tasks[3];
-              } else if (oldIndex > newIndex) {
-                newIndex = oldIndex;
-                challenge1 = tasks[0];
-                challenge2 = tasks[1];
-                challenge3 = tasks[2];
-                challenge4 = tasks[3];
-              }
-            });
-            final task = tasks.removeAt(oldIndex);
-            tasks.insert(newIndex, task);
-          }),
-    );
-  }
-
-  @override
-  Widget _acceptChallenge() {
-    bool challenge1 = false;
-    bool challenge2 = false;
-    bool challenge3 = false;
-    bool challenge4 = false;
-
-    return Row(
-      children: [
-        Text("Challenge"),
-        Checkbox(
-          value: challenge1,
-          onChanged: (bool? value) {
-            setState(() {
-              challenge1 = false;
-            });
-          },
-        ),
-      ],
-    );
-  }
+  //   return Container(
+  //     padding: EdgeInsets.all(8.0),
+  //     child: ReorderableListView(
+  //         children: <Widget>[
+  //           for (final task in tasks)
+  //             Card(
+  //               color: Colors.tealAccent,
+  //               key: ValueKey(task),
+  //               elevation: 5.0,
+  //               child: ListTile(
+  //                 title: Text(task),
+  //                 leading: Icon(Icons.task, color: Colors.black),
+  //               ),
+  //             ),
+  //         ],
+  //         onReorder: (oldIndex, newIndex) {
+  //           setState(() {
+  //             if (oldIndex < newIndex) {
+  //               newIndex = newIndex - 1;
+  //               challenge1 = tasks[0];
+  //               challenge2 = tasks[1];
+  //               challenge3 = tasks[2];
+  //               challenge4 = tasks[3];
+  //             } else if (oldIndex > newIndex) {
+  //               newIndex = oldIndex;
+  //               challenge1 = tasks[0];
+  //               challenge2 = tasks[1];
+  //               challenge3 = tasks[2];
+  //               challenge4 = tasks[3];
+  //             }
+  //           });
+  //           final task = tasks.removeAt(oldIndex);
+  //           tasks.insert(newIndex, task);
+  //         }),
+  //   );
+  // }
 
 // **************************************************************************
   // these are GLOBAL variables  to for the four main challenge rings
@@ -147,15 +137,89 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+// **************************************************************************
+  // widget below is for list of opportunities
+  // **************************************************************************
+
+  Widget _selectOpportunities() {
+    return SafeArea(
+      child: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: challengenames.length,
+              itemBuilder: (BuildContext context, int index) {
+                // return item!!!!
+                return getListBro(
+                  challengenames[index].name,
+                  challengenames[index].isSelected,
+                  index,
+                );
+              },
+            ),
+          ),
+          selectedThings.length > 0
+              ? RaisedButton(
+                  child: Text(
+                    "Select (${selectedThings.length})",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onPressed: () {
+                    print("Selected ${selectedThings.length}");
+                    challenge1 = selectedThings[0].name;
+                    challenge1 = selectedThings[1].name;
+                  },
+                )
+              : Container(),
+          SizedBox(
+            height: 10,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget getListBro(String name, bool isSelected, int index) {
+    return ListTile(
+      leading: CircleAvatar(
+        backgroundColor: Colors.amber,
+        child: Icon(Icons.person),
+      ),
+      title: Text(
+        name,
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      ),
+      trailing: isSelected
+          ? Icon(
+              Icons.check_box,
+              color: Colors.black,
+            )
+          : Icon(
+              Icons.check_box_outline_blank,
+              color: Colors.grey,
+            ),
+      onTap: () {
+        setState(() {
+          challengenames[index].isSelected = !challengenames[index].isSelected;
+          // if (challengenames[0].isSelected == true) {
+          //   challenge1 = challengenames[0].name;
+          // } else {
+          //   challenge1 = "";
+          // }
+
+          if (challengenames[index].isSelected == true) {
+            selectedThings.add(listOpportunities(name, true));
+          } else if (challengenames[index].isSelected == false) {
+            selectedThings.removeWhere(
+                (element) => element.name == challengenames[index].name);
+            challenge1 = "";
+            challenge2 = "";
+            challenge3 = "";
+            challenge4 = "";
+          }
+        });
+      },
+    );
   }
 
 // **************************************************************************
@@ -414,18 +478,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     },
                     child: Text('Add Progress'),
                   ),
-                  // ElevatedButton(
-                  //   onPressed: () {
-                  //     setState(() {
-                  //       // _goodDay = _goodDay + 0.2;
-                  //     });
-                  //   },
-                  //   style: ElevatedButton.styleFrom(primary: Colors.green),
-                  //   child: Text(
-                  //     'Send Challenge',
-                  //     style: TextStyle(fontSize: 10),
-                  //   ),
-                  // ),
                 ],
               ),
               Column(
@@ -440,8 +492,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   Container(
                     width: size,
                     height: size,
-                    // color: Colors.blue,
-                    // padding: EdgeInsets.all(20),
                     child: Stack(
                       fit: StackFit.expand,
                       children: [
@@ -473,41 +523,24 @@ class _MyHomePageState extends State<MyHomePage> {
                           complete4 = "100%";
                         } else if (ring4 < 0.2) {
                           ring4 = ring4 + 0.2;
-                          // complete1 = '$progress';
                           complete4 = "20%";
                         } else if (ring4 < 0.4) {
                           ring4 = ring4 + 0.2;
-                          // complete1 = '$progress';
                           complete4 = "40%";
                         } else if (ring4 < 0.6) {
                           ring4 = ring4 + 0.2;
-                          // complete1 = '$progress';
                           complete4 = "60%";
                         } else if (ring4 < 0.8) {
                           ring4 = ring4 + 0.2;
-                          // complete1 = '$progress';
                           complete4 = "80%";
                         } else if (ring4 == 0.8) {
                           ring4 = ring4 + 0.2;
-                          // complete1 = '$progress';
                           complete4 = "100%";
                         }
                       });
                     },
                     child: Text('Add Progress'),
                   ),
-                  // ElevatedButton(
-                  //   onPressed: () {
-                  //     setState(() {
-                  //       // _goodDay = _goodDay + 0.2;
-                  //     });
-                  //   },
-                  //   style: ElevatedButton.styleFrom(primary: Colors.green),
-                  //   child: Text(
-                  //     'Send Challenge',
-                  //     style: TextStyle(fontSize: 10),
-                  //   ),
-                  // ),
                 ],
               ),
             ],
@@ -560,20 +593,12 @@ class _MyHomePageState extends State<MyHomePage> {
       case 1:
         return _profileScreen();
       case 2:
-        return _listofOpportunities();
-      // case 3:
-      //   return Text("Other content will go here once we realize what it is",
-      //       style: TextStyle(fontSize: 30));
+        return _selectOpportunities();
       default:
         return const Center(child: Icon(Icons.home, size: 20));
     }
   }
   // widget that changes tabs and each case is a screen (containing their own widget)
-
-  // double ring4 = 0.0;
-  // double _metSomeone = 0.0;
-  // double _wentOutside = 0.0;
-  // double _goodDay = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -598,35 +623,7 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: () {},
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: const Icon(
-      //     Icons.info,
-      //     size: 50,
-      //   ),
-      // ),
-      // appBar: PreferredSize(
-      //   preferredSize: Size.fromHeight(80.0),
-      //   child: AppBar(
-      //     // centerTitle: true,
-      //     title: Image.asset(
-      //       'assets/Asset2.png',
-      //       fit: BoxFit.contain,
-      //       width: 50,
-      //     ),
-      //   ),
-      // ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Info',
-      //   child: const Icon(
-      //     Icons.info,
-      //     size: 50,
-      //   ),
-      // ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
-
       body: Center(
         child: _selectTab(),
       ),
