@@ -77,71 +77,13 @@ class _MyHomePageState extends State<MyHomePage> {
     listOpportunities("Smoke Weed with Somebody", false),
     listOpportunities("Sing a song", false),
     listOpportunities("get an A in class", false),
+    listOpportunities("Share a lighter with someone", false),
+    listOpportunities("Give someone a compliment", false),
+    listOpportunities("Help the blind", false),
+    listOpportunities("Hug someone", false),
   ];
 
   List<listOpportunities> selectedThings = [];
-// **************************************************************************
-// the list of items in the list below; this will be moved into a new page
-// **************************************************************************
-  // final List<int> _items = List<int>.generate(8, (int index) => index);
-
-  // List<String> tasks = [
-  //   "Pick Up Litter",
-  //   "Donate To Needy",
-  //   "Help Someone",
-  //   "Make Someone Smile",
-  //   "Tutor Someone For Free",
-  //   "Buy Someone Food",
-  //   "Buy Someone Water",
-  //   "Buy Someone Fruits"
-  // ];
-
-// **************************************************************************
-// these are CHALLENGE OPPORTUNITIES based on quiz user fills out
-// **************************************************************************
-
-  // @override
-  // Widget _listofOpportunities() {
-  //   final ColorScheme colorScheme = Theme.of(context).colorScheme;
-  //   final Color oddItemColor = Color.fromRGBO(139, 200, 89, 1);
-  //   final Color evenItemColor = Color.fromRGBO(101, 189, 184, 1);
-
-  //   return Container(
-  //     padding: EdgeInsets.all(8.0),
-  //     child: ReorderableListView(
-  //         children: <Widget>[
-  //           for (final task in tasks)
-  //             Card(
-  //               color: Colors.tealAccent,
-  //               key: ValueKey(task),
-  //               elevation: 5.0,
-  //               child: ListTile(
-  //                 title: Text(task),
-  //                 leading: Icon(Icons.task, color: Colors.black),
-  //               ),
-  //             ),
-  //         ],
-  //         onReorder: (oldIndex, newIndex) {
-  //           setState(() {
-  //             if (oldIndex < newIndex) {
-  //               newIndex = newIndex - 1;
-  //               challenge1 = tasks[0];
-  //               challenge2 = tasks[1];
-  //               challenge3 = tasks[2];
-  //               challenge4 = tasks[3];
-  //             } else if (oldIndex > newIndex) {
-  //               newIndex = oldIndex;
-  //               challenge1 = tasks[0];
-  //               challenge2 = tasks[1];
-  //               challenge3 = tasks[2];
-  //               challenge4 = tasks[3];
-  //             }
-  //           });
-  //           final task = tasks.removeAt(oldIndex);
-  //           tasks.insert(newIndex, task);
-  //         }),
-  //   );
-  // }
 
 // **************************************************************************
   // these are GLOBAL variables  to for the four main challenge rings
@@ -173,6 +115,17 @@ class _MyHomePageState extends State<MyHomePage> {
     return SafeArea(
       child: Column(
         children: [
+          SizedBox(
+            height: 10,
+          ),
+          Text(
+            'Select 4 Challenges Bro',
+            style: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.teal),
+          ),
+          SizedBox(
+            height: 10,
+          ),
           Expanded(
             child: ListView.builder(
               itemCount: challengenames.length,
@@ -186,21 +139,58 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
           ),
-          selectedThings.length > 0
-              ? RaisedButton(
-                  child: Text(
-                    "Select (${selectedThings.length})",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  onPressed: () {
-                    print("Selected ${selectedThings.length}");
-                    challenge1 = selectedThings[0].name;
-                    challenge1 = selectedThings[1].name;
-                  },
-                )
-              : Container(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              selectedThings.length > 0
+                  ? ElevatedButton(
+                      child: Text(
+                        "Selected (${selectedThings.length})",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        print("Selected (${selectedThings.length})");
+                        challenge1 = selectedThings[0].name;
+                        challenge2 = selectedThings[1].name;
+                        challenge3 = selectedThings[2].name;
+                        challenge4 = selectedThings[3].name;
+                        complete1 = "";
+                        complete2 = "";
+                        complete3 = "";
+                        complete4 = "";
+                        ring1 = 0;
+                        ring2 = 0;
+                        ring3 = 0;
+                        ring4 = 0;
+                      },
+                    )
+                  : Container(),
+              selectedThings.length > 0
+                  ? ElevatedButton(
+                      child: Text(
+                        "Take Quiz Again",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        challenge1 = "";
+                        challenge2 = "";
+                        challenge3 = "";
+                        challenge4 = "";
+                        complete1 = "";
+                        complete2 = "";
+                        complete3 = "";
+                        complete4 = "";
+                        ring1 = 0;
+                        ring2 = 0;
+                        ring3 = 0;
+                        ring4 = 0;
+                      },
+                    )
+                  : Container(),
+            ],
+          ),
           SizedBox(
-            height: 10,
+            height: 20,
           ),
         ],
       ),
@@ -210,8 +200,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget getListBro(String name, bool isSelected, int index) {
     return ListTile(
       leading: CircleAvatar(
-        backgroundColor: Colors.amber,
-        child: Icon(Icons.person),
+        backgroundColor: Colors.teal,
+        child: Icon(Icons.circle_outlined),
       ),
       title: Text(
         name,
@@ -623,7 +613,7 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
             icon: Icon(Icons.info),
             iconSize: 40,
-            onPressed: () {},
+            onPressed: _showMyDialog,
           ),
         ],
         leading: IconButton(
@@ -656,6 +646,47 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
+    );
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(
+            'HOW TO USE THIS APP?',
+            style: TextStyle(
+                fontWeight: FontWeight.bold, color: Colors.teal, fontSize: 30),
+          ),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('1. Start by filling out the quiz'),
+                Text('2. Select four challenges to complete'),
+                Text('3. Complete all challegnes within a week'),
+                Text('4. Select another 4, and repeat'),
+                Text('(Or retake the quiz to reveal new challenges)'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text(
+                'Okay Bro',
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    backgroundColor: Colors.black),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
