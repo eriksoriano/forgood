@@ -145,7 +145,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         style: TextStyle(fontSize: 20),
                       ),
                       onPressed: () {
-                        print("Select (${selectedThings.length})");
+                        print("Select(${selectedThings.length})");
                         challenge1 = selectedThings[0].name;
                         challenge2 = selectedThings[1].name;
                         challenge3 = selectedThings[2].name;
