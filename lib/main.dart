@@ -69,12 +69,12 @@ class _MyHomePageState extends State<MyHomePage> {
 // **************************************************************************
 
   List<listOpportunities> challengenames = [
-    listOpportunities("", false),
-    listOpportunities("", false),
-    listOpportunities("", false),
-    listOpportunities("", false),
-    listOpportunities("", false),
-    listOpportunities("", false),
+    listOpportunities("Picking up litter", false),
+    listOpportunities("Collecting and making compost", false),
+    listOpportunities("Thrifting", false),
+    listOpportunities("Choosing vegan options", false),
+    listOpportunities("Choosing vegan options", false),
+    listOpportunities("Donating to environmental agency", false),
   ];
 
   List<listOpportunities> selectedThings = [];
