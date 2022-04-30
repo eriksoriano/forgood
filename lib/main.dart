@@ -141,11 +141,11 @@ class _MyHomePageState extends State<MyHomePage> {
               selectedThings.length > 0
                   ? ElevatedButton(
                       child: Text(
-                        "Selected (${selectedThings.length})",
+                        "Select (${selectedThings.length})",
                         style: TextStyle(fontSize: 20),
                       ),
                       onPressed: () {
-                        print("Selected (${selectedThings.length})");
+                        print("Select (${selectedThings.length})");
                         challenge1 = selectedThings[0].name;
                         challenge2 = selectedThings[1].name;
                         challenge3 = selectedThings[2].name;
