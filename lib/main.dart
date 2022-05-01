@@ -1,7 +1,7 @@
 // import 'dart:ffi';
 import 'package:finalproject/list.dart';
 import 'package:flutter/material.dart';
-// import 'quiz.dart';
+import 'quiz.dart';
 
 void main() {
   runApp(const MyApp());
@@ -61,7 +61,10 @@ class _MyHomePageState extends State<MyHomePage> {
 //----------------------------------------------------------------------------------
 // widget that changes tabs and each case is a screen (containing their own widget)
 //----------------------------------------------------------------------------------
-
+//
+//
+//
+//
 // **************************************************************************
 // list below comes from list.dart
 // this lists includes array of all possible challenges users can pick
@@ -70,11 +73,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<listOpportunities> challengenames = [
     listOpportunities("Picking up litter", false),
-    listOpportunities("Collecting and making compost", false),
+    listOpportunities("Collect & make compost", false),
     listOpportunities("Thrifting", false),
-    listOpportunities("Choosing vegan options", false),
-    listOpportunities("Choosing vegan options", false),
-    listOpportunities("Donating to environmental agency", false),
+    listOpportunities("Recyling", false),
+    listOpportunities("Choose vegan options", false),
+    listOpportunities("Donate to environment agency", false),
   ];
 
   List<listOpportunities> selectedThings = [];
@@ -124,15 +127,6 @@ class _MyHomePageState extends State<MyHomePage> {
               child: const Text('Return'),
               onPressed: () {
                 Navigator.of(context).pop();
-                List<listOpportunities> challengenames = [
-                  listOpportunities("Volunteer", false),
-                  listOpportunities("dos", false),
-                  listOpportunities("3", false),
-                  listOpportunities("4", false),
-                  listOpportunities("5", false),
-                  listOpportunities("6", false),
-                ];
-                List<listOpportunities> selectedThings = [];
               },
             ),
           ],
@@ -805,16 +799,31 @@ class _MyHomePageState extends State<MyHomePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
+              Text(
+                challenge1,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 15),
+              ),
+              Text(
+                challenge2,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 15),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
               Column(
                 children: [
-                  Text(
-                    challenge1,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
+                  // Text(
+                  //   challenge1,
+                  //   textAlign: TextAlign.center,
+                  //   style: TextStyle(fontSize: 15),
+                  // ),
+                  // SizedBox(
+                  //   height: 10,
+                  // ),
                   Container(
                     width: size,
                     height: size,
@@ -878,13 +887,13 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Column(
                 children: [
-                  Text(
-                    challenge2,
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
+                  // Text(
+                  //   challenge2,
+                  //   style: TextStyle(fontSize: 15),
+                  // ),
+                  // SizedBox(
+                  //   height: 10,
+                  // ),
                   Container(
                     width: size,
                     height: size,
@@ -952,15 +961,31 @@ class _MyHomePageState extends State<MyHomePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
+              Text(
+                challenge3,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 15),
+              ),
+              Text(
+                challenge4,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 15),
+              ),
+            ],
+          ),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
               Column(
                 children: [
-                  Text(
-                    challenge3,
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
+                  // Text(
+                  //   challenge3,
+                  //   style: TextStyle(fontSize: 15),
+                  // ),
+                  // SizedBox(
+                  //   height: 10,
+                  // ),
                   Container(
                     width: size,
                     height: size,
@@ -1024,13 +1049,13 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Column(
                 children: [
-                  Text(
-                    challenge4,
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
+                  // Text(
+                  //   challenge4,
+                  //   style: TextStyle(fontSize: 15),
+                  // ),
+                  // SizedBox(
+                  //   height: 10,
+                  // ),
                   Container(
                     width: size,
                     height: size,
