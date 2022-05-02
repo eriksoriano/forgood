@@ -605,16 +605,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Text('SUBMIT'),
                   ),
                   SizedBox(width: 20),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.teal[500],
-                      onPrimary: Colors.white,
-                    ),
-                    onPressed: () {
-                      _reset();
-                    },
-                    child: Text('RESET'),
-                  ),
+                  // ElevatedButton(
+                  //   style: ElevatedButton.styleFrom(
+                  //     primary: Colors.teal[500],
+                  //     onPrimary: Colors.white,
+                  //   ),
+                  //   onPressed: () {
+                  //     _reset();
+                  //   },
+                  //   child: Text('RESET'),
+                  // ),
                 ],
               )
 //SizedBox(height:50),
