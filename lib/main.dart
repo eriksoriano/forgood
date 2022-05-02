@@ -72,13 +72,22 @@ class _MyHomePageState extends State<MyHomePage> {
 // **************************************************************************
 
   List<listOpportunities> challengenames = [
-    listOpportunities("Picking up litter", false),
-    listOpportunities("Collect & make compost", false),
-    listOpportunities("Thrifting", false),
-    listOpportunities("Recyling", false),
-    listOpportunities("Choose vegan options", false),
-    listOpportunities("Donate to environment agency", false),
+    listOpportunities("", false),
+    listOpportunities("", false),
+    listOpportunities("", false),
+    listOpportunities("", false),
+    listOpportunities("", false),
+    listOpportunities("", false),
   ];
+
+  // List<listOpportunities> challengenames = [
+  //   listOpportunities("uno", false),
+  //   listOpportunities("dos", false),
+  //   listOpportunities("tres", false),
+  //   listOpportunities("cuatro", false),
+  //   listOpportunities("cinco", false),
+  //   listOpportunities("seis", false),
+  // ];
 
   List<listOpportunities> selectedThings = [];
 
@@ -103,6 +112,15 @@ class _MyHomePageState extends State<MyHomePage> {
   String complete2 = "";
   String complete3 = "";
   String complete4 = "";
+
+  List<String> miscCategory = [
+    "Donate books",
+    "Download 'Be My Eyes'",
+    "Use dosomething.org",
+    "Download 'Book Share'",
+    "Donate on 'Amazon Smile'",
+    "Play 'Free Rice'",
+  ];
 
 // **************************************************************************
 // quiz goes below; we have to figure out how to move it to another page
@@ -143,28 +161,20 @@ class _MyHomePageState extends State<MyHomePage> {
     int secondOption = 0;
     String output = "";
     List<String> environmentCategory = [
-      "Picking up litter",
-      "Collecting and making compost",
-      "Recycling",
-      "Thrifting",
-      "Choosing vegan options",
-      "Donating to environmental agency"
+      "Pick-up litter",
+      "Collect/make compost",
+      "Recycle",
+      "Thrift",
+      "Eat vegan",
+      "Donate Money"
     ];
     List<String> communityCategory = [
       "Tutoring",
-      "PenPal someone in need",
-      "Give someone a compliment",
-      "Make a stranger smile",
-      "Donating food to pantry",
-      "Sign human rights petitions"
-    ];
-    List<String> miscCategory = [
-      "Donate books to schools",
-      "Download and use 'Be My Eyes'",
-      "Find a volunteer opportunity @ dosomething.org",
-      "Download and use 'Book Share'",
-      "Donate using 'Amazon Smile'",
-      "Play 'Free Rice'",
+      "PenPal Someone",
+      "Compliment Someone",
+      "Make Someone smile",
+      "Donate Food",
+      "Sign petitions"
     ];
     void _incrementFirst() {
       setState(() {
@@ -184,18 +194,19 @@ class _MyHomePageState extends State<MyHomePage> {
           for (int i = 0; i < environmentCategory.length; i++)
             output += environmentCategory[i] + " \n *";
 //output = "Picking up litter, Collecting and making compost, Recycling,
-          "Thrifting, Choosing vegan option, Donating to environmental agency";
+          // "Thrifting, Choosing vegan option, Donating to environmental agency";
         } else if (secondOption > firstOption) {
           for (int i = 0; i < communityCategory.length; i++)
             output += communityCategory[i] + " \n *";
 //output = "Tutoring, Penpal someone in need, Give someone a compliment, Make a
-          "stranger smile, Donating to food pantry, Sign human rights petitions";
+          // "stranger smile, Donating to food pantry, Sign human rights petitions";
         } else if (firstOption == secondOption) {
           for (int i = 0; i < miscCategory.length; i++)
             output += miscCategory[i] + " \n *";
 //output="Donate books to school, Download and use 'Be My Eyes', Find a
-          "volunteer opportunity @ dosomething.org, Download and use 'Book Share', Donate using 'Amazon Smile', Play 'Free Rice'";
+          // "volunteer opportunity @ dosomething.org, Download and use 'Book Share', Donate using 'Amazon Smile', Play 'Free Rice'";
         }
+        // _showMyDialog2(challengenames[0].name);
         _showMyDialog2(output);
       });
     }
@@ -594,6 +605,31 @@ class _MyHomePageState extends State<MyHomePage> {
                       onPrimary: Colors.white,
                     ),
                     onPressed: () {
+                      setState(() {
+                        if (firstOption > secondOption) {
+                          challengenames[0].name = environmentCategory[0];
+                          challengenames[1].name = environmentCategory[1];
+                          challengenames[2].name = environmentCategory[2];
+                          challengenames[3].name = environmentCategory[3];
+                          challengenames[4].name = environmentCategory[4];
+                          challengenames[5].name = environmentCategory[5];
+                        } else if (secondOption > firstOption) {
+                          challengenames[0].name = communityCategory[0];
+                          challengenames[1].name = communityCategory[1];
+                          challengenames[2].name = communityCategory[2];
+                          challengenames[3].name = communityCategory[3];
+                          challengenames[4].name = communityCategory[4];
+                          challengenames[5].name = communityCategory[5];
+                        } else if (firstOption == secondOption) {
+                          challengenames[0].name = miscCategory[0];
+                          challengenames[1].name = miscCategory[1];
+                          challengenames[2].name = miscCategory[2];
+                          challengenames[3].name = miscCategory[3];
+                          challengenames[4].name = miscCategory[4];
+                          challengenames[5].name = miscCategory[5];
+                        }
+                      });
+
                       _getCategory();
                     },
                     child: Text('SUBMIT'),
@@ -683,26 +719,26 @@ class _MyHomePageState extends State<MyHomePage> {
                   : Container(),
               // selectedThings.length > 0
               // ?
-              ElevatedButton(
-                child: Text(
-                  "Take Quiz Again",
-                  style: TextStyle(fontSize: 20),
-                ),
-                onPressed: () {
-                  challenge1 = "";
-                  challenge2 = "";
-                  challenge3 = "";
-                  challenge4 = "";
-                  complete1 = "";
-                  complete2 = "";
-                  complete3 = "";
-                  complete4 = "";
-                  ring1 = 0;
-                  ring2 = 0;
-                  ring3 = 0;
-                  ring4 = 0;
-                },
-              )
+              // ElevatedButton(
+              //   child: Text(
+              //     "Take Quiz Again",
+              //     style: TextStyle(fontSize: 20),
+              //   ),
+              //   onPressed: () {
+              //     challenge1 = "";
+              //     challenge2 = "";
+              //     challenge3 = "";
+              //     challenge4 = "";
+              //     complete1 = "";
+              //     complete2 = "";
+              //     complete3 = "";
+              //     complete4 = "";
+              //     ring1 = 0;
+              //     ring2 = 0;
+              //     ring3 = 0;
+              //     ring4 = 0;
+              //   },
+              // )
               // :
               // Container(),
             ],
