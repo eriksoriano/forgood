@@ -1,7 +1,6 @@
 // import 'dart:ffi';
 import 'package:finalproject/list.dart';
 import 'package:flutter/material.dart';
-// import 'quiz.dart';
 
 void main() {
   runApp(const MyApp());
