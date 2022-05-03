@@ -1,7 +1,7 @@
 // import 'dart:ffi';
 import 'package:finalproject/list.dart';
 import 'package:flutter/material.dart';
-import 'quiz.dart';
+// import 'quiz.dart';
 
 void main() {
   runApp(const MyApp());
@@ -607,21 +607,24 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () {
                       setState(() {
                         if (firstOption > secondOption) {
-                          challengenames[0].name = environmentCategory[0];
+                          for (int i = 0; i < environmentCategory.length; i++)
+                            challengenames[0].name = environmentCategory[0];
                           challengenames[1].name = environmentCategory[1];
                           challengenames[2].name = environmentCategory[2];
                           challengenames[3].name = environmentCategory[3];
                           challengenames[4].name = environmentCategory[4];
                           challengenames[5].name = environmentCategory[5];
                         } else if (secondOption > firstOption) {
-                          challengenames[0].name = communityCategory[0];
+                          for (int i = 0; i < communityCategory.length; i++)
+                            challengenames[0].name = communityCategory[0];
                           challengenames[1].name = communityCategory[1];
                           challengenames[2].name = communityCategory[2];
                           challengenames[3].name = communityCategory[3];
                           challengenames[4].name = communityCategory[4];
                           challengenames[5].name = communityCategory[5];
                         } else if (firstOption == secondOption) {
-                          challengenames[0].name = miscCategory[0];
+                          for (int i = 0; i < miscCategory.length; i++)
+                            challengenames[0].name = miscCategory[0];
                           challengenames[1].name = miscCategory[1];
                           challengenames[2].name = miscCategory[2];
                           challengenames[3].name = miscCategory[3];
